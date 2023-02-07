@@ -1,0 +1,12 @@
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\bin\Debug\net7.0\Services.deps.json
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\bin\Debug\net7.0\Services.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\bin\Debug\net7.0\Services.pdb
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.csproj.AssemblyReference.cache
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.AssemblyInfoInputs.cache
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.AssemblyInfo.cs
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.csproj.CoreCompileInputs.cache
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\refint\Services.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.pdb
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\ref\Services.dll
