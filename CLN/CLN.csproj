@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CAD\CAD.csproj" />
+    <ProjectReference Include="..\CEN\CEN.csproj" />
+  </ItemGroup>
+
 </Project>

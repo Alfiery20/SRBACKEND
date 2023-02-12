@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CEN
 {
-    internal class CenUsuario
+    public class CenUsuario
     {
         public int id { get; set; }
         public string codigo { get; set; }
@@ -16,6 +16,6 @@ namespace CEN
         public string estado { get; set; }
         public string correoElectronico { get; set; }
         public string clave { get; set; }
-
+        public string token { get; set; }
     }
 }

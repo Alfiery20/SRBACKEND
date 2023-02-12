@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CEN.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,7 +37,7 @@ namespace APIService
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-             if (env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
@@ -52,7 +53,7 @@ namespace APIService
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                
+
             );
             app.UseAuthorization();
 
@@ -60,15 +61,21 @@ namespace APIService
             {
                 endpoints.MapControllers();
             });
-            // Configuration = new ConfigurationBuilder()
-            // //.AddJsonFile("appsettings.json")
-            
-            // //.SetBasePath("/app")
-            // .SetBasePath(Directory.GetCurrentDirectory())
-            // //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("appsettings")}.json")
-            // .AddJsonFile($"appsettings.Development.json")
-            // .AddEnvironmentVariables()
-            // .Build();
+            Configuration = new ConfigurationBuilder()
+             //.AddJsonFile("appsettings.json")
+
+             //.SetBasePath("/app")
+             .SetBasePath(Directory.GetCurrentDirectory())
+             //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("appsettings")}.json")
+             .AddJsonFile($"appsettings.Development.json")
+             .AddEnvironmentVariables()
+             .Build();
+
+            Constants.server_name = this.Configuration.GetValue<String>("SQLConexion:server_name");
+            Constants.database_name = this.Configuration.GetValue<String>("SQLConexion:database_name");
+            Constants.user_name = this.Configuration.GetValue<String>("SQLConexion:user_name");
+            Constants.user_pass = this.Configuration.GetValue<String>("SQLConexion:user_pass");
+            Constants.cadena_conexion = $"data source = {Constants.server_name}; initial catalog = {Constants.database_name}; user id = {Constants.user_name}; password = {Constants.user_pass}; TrustServerCertificate=True";
         }
     }
 }
