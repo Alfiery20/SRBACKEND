@@ -10,6 +10,7 @@ namespace CEN
     {
         public int id { get; set; }
         public string tipo { get; set; }
+        public string codigo { get; set; }
         public string descripcion { get; set; }
         public object objeto { get; set; }
     }

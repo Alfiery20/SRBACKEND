@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using CEN;
 using CEN.Request;
 using CEN.Helpers;
+using System.Collections;
 
 namespace CAD
 {
@@ -58,6 +59,44 @@ namespace CAD
             {
                 _sqlConexion.Close();
             }
+        }
+
+        public CenControlError IUDCategoria(IUDCategoriaRequest cenCategoria, string acccion)
+        {
+            CenControlError response = new CenControlError();
+            SqlConnection _sqlConexion;
+            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            SqlCommand cmd;
+            try
+            {
+                _sqlConexion.Open();
+                cmd = new SqlCommand("sp_iudCategoria", _sqlConexion);
+                cmd.Parameters.Add(new SqlParameter("@idCategoria", cenCategoria.id));
+                cmd.Parameters.Add(new SqlParameter("@nomCategoria", cenCategoria.nombre));
+                cmd.Parameters.Add(new SqlParameter("@accion", acccion));
+
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        response.tipo = acccion;
+                        response.codigo = reader["CODIGO"].ToString();
+                        response.descripcion = reader["MENSAJE"].ToString();
+                    }
+                }
+                return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _sqlConexion.Close();
+            }
+            return response;
         }
     }
 }
