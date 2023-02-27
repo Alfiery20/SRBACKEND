@@ -10,7 +10,7 @@ namespace CEN.Request
     {
         public string? codigo { get; set; }
         public string? nombre { get; set; }
-        public string tipoBusqueda { get; set; }
+        public string? tipoBusqueda { get; set; }
         public int pagina { get; set; }
         public int cantidad { get; set; }
     }

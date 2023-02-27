@@ -52,3 +52,4 @@ E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\APIService\obj\Debug\net7.0\refint\API
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\APIService\obj\Debug\net7.0\APIService.pdb
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\APIService\obj\Debug\net7.0\APIService.genruntimeconfig.cache
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\APIService\obj\Debug\net7.0\ref\APIService.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\APIService\bin\Debug\net7.0\Newtonsoft.Json.dll

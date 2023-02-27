@@ -13,3 +13,5 @@ E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CAD\obj\Debug\net7.0\CAD.dll
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CAD\obj\Debug\net7.0\refint\CAD.dll
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CAD\obj\Debug\net7.0\CAD.pdb
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CAD\obj\Debug\net7.0\ref\CAD.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CAD\bin\Debug\net7.0\Services.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CAD\bin\Debug\net7.0\Services.pdb

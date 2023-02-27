@@ -13,5 +13,6 @@ namespace CEN.Helpers
         public static string user_name { get; set; }
         public static string user_pass { get; set; }
         public static string cadena_conexion { get; set; }
+        public static string clave_encriptacion { get; set; }
     }
 }

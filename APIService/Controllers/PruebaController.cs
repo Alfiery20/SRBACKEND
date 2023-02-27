@@ -1,4 +1,7 @@
+using CEN.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Services.Encrypt;
+using System.Security.Cryptography;
 
 namespace APIService.Controllers;
 
@@ -17,6 +20,13 @@ public class PruebaController : ControllerBase
     [HttpGet("prueba")]
     public async Task<IActionResult> Prueba()
     {
-        return Ok("Sumaq Rumi " + new DateTime());
+        string textoSinEncriptar = "Mi texto a encriptar";
+        string textoEncriptado = EncrypAES.EncryptStringAES(textoSinEncriptar, Constants.clave_encriptacion);
+
+        string textoDesencriptado = EncrypAES.DecryptStringAES(textoEncriptado, Constants.clave_encriptacion);
+        Console.WriteLine("Texto desencriptado: " + textoDesencriptado);
+        Console.WriteLine("Texto encriptado: " + textoEncriptado);
+        var arr = new { textoEncriptado,  textoDesencriptado};
+        return Ok(arr);
     }
 }

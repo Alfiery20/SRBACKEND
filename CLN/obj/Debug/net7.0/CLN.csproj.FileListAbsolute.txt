@@ -15,3 +15,5 @@ E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CLN\obj\Debug\net7.0\CLN.dll
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CLN\obj\Debug\net7.0\refint\CLN.dll
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CLN\obj\Debug\net7.0\CLN.pdb
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CLN\obj\Debug\net7.0\ref\CLN.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CLN\bin\Debug\net7.0\Services.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\CLN\bin\Debug\net7.0\Services.pdb

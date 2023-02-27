@@ -26,9 +26,9 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_obtenerCategorias", _sqlConexion);
-                cmd.Parameters.AddWithValue("@codCat", request.codigo);
-                cmd.Parameters.AddWithValue("@nomCat", request.nombre);
-                cmd.Parameters.AddWithValue("@tipoBusqu", request.tipoBusqueda);
+                cmd.Parameters.AddWithValue("@codCat", request.codigo == null? null: request.codigo.Trim());
+                cmd.Parameters.AddWithValue("@nomCat", request.nombre == null? null: request.nombre.Trim());
+                cmd.Parameters.AddWithValue("@tipoBusqu", request.tipoBusqueda == null? null: request.tipoBusqueda.Trim());
                 cmd.Parameters.AddWithValue("@page", request.pagina);
                 cmd.Parameters.AddWithValue("@count", request.cantidad);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -72,7 +72,7 @@ namespace CAD
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudCategoria", _sqlConexion);
                 cmd.Parameters.Add(new SqlParameter("@idCategoria", cenCategoria.id));
-                cmd.Parameters.Add(new SqlParameter("@nomCategoria", cenCategoria.nombre));
+                cmd.Parameters.Add(new SqlParameter("@nomCategoria", cenCategoria.nombre == null ? null: cenCategoria.nombre.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@accion", acccion));
 
 
@@ -96,7 +96,6 @@ namespace CAD
             {
                 _sqlConexion.Close();
             }
-            return response;
         }
     }
 }
