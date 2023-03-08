@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Services.Token;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -53,30 +54,16 @@ namespace APIService.Controllers
             {
                 ClnUsuario clnUsuario = new ClnUsuario();
                 var request = clnUsuario.ValidarUsuario(loginRequest);
-                var token = new JwtSecurityToken();
                 if (request.codigo == "1") 
                 {
                     var jwt = _configuration.GetSection("jwt").Get<CenJWT>();
-                    var claims = new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub, jwt.Subject),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                        new Claim("user", JsonConvert.SerializeObject(request.objeto))
-                    };
-
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
-                    var singIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                    token = new JwtSecurityToken
-                        (
-                            jwt.Issuer,
-                            jwt.Audience,
-                            claims,
-                            expires: DateTime.Now.AddMilliseconds(jwt.Expire*1000),
-                            signingCredentials: singIn
-                        );
+                    JwtSecurityToken token = TokenService.GenerarToken(jwt, (UsuarioResponse)request.objeto);
                     var tokennuevo = new JwtSecurityTokenHandler().WriteToken(token);
                     ((UsuarioResponse)request.objeto).Token = tokennuevo;
+                    InsertTokenRequest insert = new InsertTokenRequest();
+                    insert.Correo = ((UsuarioResponse)request.objeto).CorreoElectronico;
+                    insert.Token = ((UsuarioResponse)request.objeto).Token;
+                    clnUsuario.InsertToken(insert);
                 }
                 return Ok(request);
             }

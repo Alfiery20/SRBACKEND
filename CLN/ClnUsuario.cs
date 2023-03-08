@@ -27,5 +27,10 @@ namespace CLN
             request.clave = EncrypAES.EncryptStringAES(request.clave, Constants.clave_encriptacion);
             return c.ValidadUsuario(request);
         }
+        public CenControlError InsertToken(InsertTokenRequest request)
+        {
+            CadUsuario c = new CadUsuario();
+            return c.InsertToken(request);
+        }
     }
 }

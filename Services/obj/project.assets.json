@@ -607,6 +607,16 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "CEN/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/CEN.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CEN.dll": {}
+        }
       }
     }
   },
@@ -1811,10 +1821,16 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "CEN/1.0.0": {
+      "type": "project",
+      "path": "../CEN/CEN.csproj",
+      "msbuildProject": "../CEN/CEN.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "CEN >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.3",
       "Newtonsoft.Json >= 13.0.2",
@@ -1848,7 +1864,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\Alfiery\\Proyectos\\Sumaq Rumi\\SRBackend\\CEN\\CEN.csproj": {
+              "projectPath": "E:\\Alfiery\\Proyectos\\Sumaq Rumi\\SRBackend\\CEN\\CEN.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -12,3 +12,6 @@ E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.pdb
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\ref\Services.dll
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\bin\Debug\net7.0\Services.runtimeconfig.json
 E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.genruntimeconfig.cache
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\bin\Debug\net7.0\CEN.dll
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\bin\Debug\net7.0\CEN.pdb
+E:\Alfiery\Proyectos\Sumaq Rumi\SRBackend\Services\obj\Debug\net7.0\Services.csproj.CopyComplete

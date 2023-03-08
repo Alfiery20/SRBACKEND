@@ -98,5 +98,38 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
+
+        public CenControlError InsertToken(InsertTokenRequest insertTokenRequest)
+        {
+            CenControlError response = new CenControlError();
+            SqlConnection _sqlConexion;
+            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            SqlCommand cmd;
+            try
+            {
+                _sqlConexion.Open();
+                cmd = new SqlCommand("sp_insertToken", _sqlConexion);
+                cmd.Parameters.Add(new SqlParameter("@correoUsuario", insertTokenRequest.Correo == null ? null : insertTokenRequest.Correo.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@token", insertTokenRequest.Token));
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        response.codigo = reader["CODIGO"].ToString();
+                    }
+                }
+                return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _sqlConexion.Close();
+            }
+        }
     }
 }

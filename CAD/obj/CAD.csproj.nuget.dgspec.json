@@ -154,7 +154,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "E:\\Alfiery\\Proyectos\\Sumaq Rumi\\SRBackend\\CEN\\CEN.csproj": {
+                "projectPath": "E:\\Alfiery\\Proyectos\\Sumaq Rumi\\SRBackend\\CEN\\CEN.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
