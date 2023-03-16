@@ -23,8 +23,8 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_insertControlError", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@tipoError", request.tipo));
-                cmd.Parameters.Add(new SqlParameter("@descripcion", request.descripcion));
+                cmd.Parameters.Add(new SqlParameter("@ptipoError", request.tipo));
+                cmd.Parameters.Add(new SqlParameter("@pdescripcion", request.descripcion));
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
                 {

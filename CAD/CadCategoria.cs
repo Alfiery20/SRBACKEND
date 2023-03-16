@@ -26,11 +26,11 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_obtenerCategorias", _sqlConexion);
-                cmd.Parameters.AddWithValue("@codCat", request.codigo == null? null: request.codigo.Trim());
-                cmd.Parameters.AddWithValue("@nomCat", request.nombre == null? null: request.nombre.Trim());
-                cmd.Parameters.AddWithValue("@tipoBusqu", request.tipoBusqueda == null? null: request.tipoBusqueda.Trim());
-                cmd.Parameters.AddWithValue("@page", request.pagina);
-                cmd.Parameters.AddWithValue("@count", request.cantidad);
+                cmd.Parameters.AddWithValue("@pcodigo_Categoria", request.codigo == null? null: request.codigo.Trim());
+                cmd.Parameters.AddWithValue("@pnombre_Categoria", request.nombre == null? null: request.nombre.Trim());
+                cmd.Parameters.AddWithValue("@ptipo_Busqueda", request.tipoBusqueda == null? null: request.tipoBusqueda.Trim());
+                cmd.Parameters.AddWithValue("@ppage", request.pagina);
+                cmd.Parameters.AddWithValue("@pcount", request.cantidad);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -39,9 +39,9 @@ namespace CAD
                         lista.Add(
                             new CenCategoria()
                             {
-                                id = Int32.Parse(reader["idCategoria"].ToString()),
-                                codigo = reader["codCategoria"].ToString(),
-                                nombre = reader["nomCategoria"].ToString()
+                                id = Int32.Parse(reader["id_Categoria"].ToString()),
+                                codigo = reader["codigo_Categoria"].ToString(),
+                                nombre = reader["nombre_Categoria"].ToString()
                             }
                         );
                     }
@@ -71,9 +71,9 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudCategoria", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@idCategoria", cenCategoria.id));
-                cmd.Parameters.Add(new SqlParameter("@nomCategoria", cenCategoria.nombre == null ? null: cenCategoria.nombre.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@accion", acccion));
+                cmd.Parameters.Add(new SqlParameter("@pid_Categoria", cenCategoria.id));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_Categoria", cenCategoria.nombre == null ? null: cenCategoria.nombre.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@paccion", acccion));
 
 
                 cmd.CommandType = CommandType.StoredProcedure;

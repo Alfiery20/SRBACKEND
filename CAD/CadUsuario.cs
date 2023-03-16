@@ -26,15 +26,15 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudUsuario", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@id", iUDUsuario.id));
-                cmd.Parameters.Add(new SqlParameter("@numDocumento", iUDUsuario.numerDocumento == null ? null : iUDUsuario.numerDocumento.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@nombre", iUDUsuario.nombreCompleto == null ? null : iUDUsuario.nombreCompleto.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@apelPater", iUDUsuario.apelliPaterno == null ? null : iUDUsuario.apelliPaterno.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@apelMater", iUDUsuario.apelliMaterno == null ? null : iUDUsuario.apelliMaterno.Trim() ));
-                cmd.Parameters.Add(new SqlParameter("@corrElect", iUDUsuario.correElectronico == null ? null : iUDUsuario.correElectronico.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@clave", iUDUsuario.clave));
-                cmd.Parameters.Add(new SqlParameter("@token", iUDUsuario.token));
-                cmd.Parameters.Add(new SqlParameter("@accion", acccion));
+                cmd.Parameters.Add(new SqlParameter("@pid", iUDUsuario.id));
+                cmd.Parameters.Add(new SqlParameter("@pnumero_Documento", iUDUsuario.numerDocumento == null ? null : iUDUsuario.numerDocumento.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pnombre", iUDUsuario.nombreCompleto == null ? null : iUDUsuario.nombreCompleto.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@papellido_Paterno", iUDUsuario.apelliPaterno == null ? null : iUDUsuario.apelliPaterno.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@papellido_Materno", iUDUsuario.apelliMaterno == null ? null : iUDUsuario.apelliMaterno.Trim() ));
+                cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", iUDUsuario.correElectronico == null ? null : iUDUsuario.correElectronico.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pclave", iUDUsuario.clave));
+                cmd.Parameters.Add(new SqlParameter("@ptoken", iUDUsuario.token));
+                cmd.Parameters.Add(new SqlParameter("@paccion", acccion));
 
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -68,8 +68,8 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_obtenerUsuario", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@correoElectro", loginRequest.correoElectronico == null ? null : loginRequest.correoElectronico.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@clave", loginRequest.clave));
+                cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", loginRequest.correoElectronico == null ? null : loginRequest.correoElectronico.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pclave", loginRequest.clave));
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
@@ -109,8 +109,8 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_insertToken", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@correoUsuario", insertTokenRequest.Correo == null ? null : insertTokenRequest.Correo.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@token", insertTokenRequest.Token));
+                cmd.Parameters.Add(new SqlParameter("@pcorreo_Usuario", insertTokenRequest.Correo == null ? null : insertTokenRequest.Correo.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@ptoken", insertTokenRequest.Token));
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())

@@ -26,7 +26,7 @@ namespace APIService.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("register")]
+        [HttpPost("registroUsuario")]
         public IActionResult Register([FromBody] IUDUsuario iUDUsuario)
         {
             try
@@ -47,7 +47,7 @@ namespace APIService.Controllers
                 return BadRequest(error);
             }
         }
-        [HttpPost("validarUser")]
+        [HttpPost("validarUsuario")]
         public IActionResult ValidarUsuario([FromBody] LoginRequest loginRequest)
         {
             try

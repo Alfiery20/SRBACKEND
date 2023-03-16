@@ -20,13 +20,8 @@ public class PruebaController : ControllerBase
     [HttpGet("prueba")]
     public async Task<IActionResult> Prueba()
     {
-        string textoSinEncriptar = "Mi texto a encriptar";
-        string textoEncriptado = EncrypAES.EncryptStringAES(textoSinEncriptar, Constants.clave_encriptacion);
-
-        string textoDesencriptado = EncrypAES.DecryptStringAES(textoEncriptado, Constants.clave_encriptacion);
-        Console.WriteLine("Texto desencriptado: " + textoDesencriptado);
-        Console.WriteLine("Texto encriptado: " + textoEncriptado);
-        var arr = new { textoEncriptado,  textoDesencriptado};
-        return Ok(arr);
+        var respuesta = "BIENVENIDO A LA API DE SUMAQ RUMI";
+        return Ok(respuesta);
     }
 }
+

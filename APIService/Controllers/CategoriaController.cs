@@ -34,7 +34,7 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpPost("addCategoria")]
+        [HttpPost("agregarCategoria")]
         public IActionResult AddCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
         {
             try
@@ -56,7 +56,7 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpPut("editCategoria")]
+        [HttpPut("editarCategoria")]
         public IActionResult EditCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
         {
             try
@@ -78,7 +78,7 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpDelete("delCategoria")]
+        [HttpDelete("eliminarCategoria")]
         public IActionResult DelCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
         {
             try
