@@ -8,14 +8,14 @@ namespace CEN
 {
     public class CenUsuario
     {
-        public int id { get; set; }
-        public string? codigo { get; set; }
-        public string? nombre { get; set; }
-        public string? apellidoPaterno { get; set;}
-        public string? apellidoMaterno { get; set; }
-        public string? estado { get; set; }
-        public string? correoElectronico { get; set; }
-        public string? clave { get; set; }
-        public string? token { get; set; }
+        public int? Id { get; set; }
+        public string? Codigo { get; set; }
+        public string? Nombre { get; set; }
+        public string? ApellidoPaterno { get; set;}
+        public string? ApellidoMaterno { get; set; }
+        public string? Estado { get; set; }
+        public string? CorreoElectronico { get; set; }
+        public string? Clave { get; set; }
+        public string? Token { get; set; }
     }
 }

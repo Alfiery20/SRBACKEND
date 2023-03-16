@@ -8,9 +8,9 @@ namespace CEN
 {
     public class CenControlError
     {
-        public string tipo { get; set; }
-        public string codigo { get; set; }
-        public string descripcion { get; set; }
-        public object objeto { get; set; }
+        public string? Tipo { get; set; }
+        public string? Codigo { get; set; }
+        public string? Descripcion { get; set; }
+        public object? Objeto { get; set; }
     }
 }

@@ -40,8 +40,8 @@ namespace APIService.Controllers
                 ClnControlError obj = new ClnControlError();
                 var error = new CenControlError
                 {
-                    tipo = "C",
-                    descripcion = ex.Message
+                    Tipo = "C",
+                    Descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
                 return BadRequest(error);
@@ -54,15 +54,15 @@ namespace APIService.Controllers
             {
                 ClnUsuario clnUsuario = new ClnUsuario();
                 var request = clnUsuario.ValidarUsuario(loginRequest);
-                if (request.codigo == "1") 
+                if (request.Codigo == "1") 
                 {
                     var jwt = _configuration.GetSection("jwt").Get<CenJWT>();
-                    JwtSecurityToken token = TokenService.GenerarToken(jwt, (UsuarioResponse)request.objeto);
+                    JwtSecurityToken token = TokenService.GenerarToken(jwt, (UsuarioResponse)request.Objeto);
                     var tokennuevo = new JwtSecurityTokenHandler().WriteToken(token);
-                    ((UsuarioResponse)request.objeto).Token = tokennuevo;
+                    ((UsuarioResponse)request.Objeto).Token = tokennuevo;
                     InsertTokenRequest insert = new InsertTokenRequest();
-                    insert.Correo = ((UsuarioResponse)request.objeto).CorreoElectronico;
-                    insert.Token = ((UsuarioResponse)request.objeto).Token;
+                    insert.Correo = ((UsuarioResponse)request.Objeto).CorreoElectronico;
+                    insert.Token = ((UsuarioResponse)request.Objeto).Token;
                     clnUsuario.InsertToken(insert);
                 }
                 return Ok(request);
@@ -72,8 +72,8 @@ namespace APIService.Controllers
                 ClnControlError obj = new ClnControlError();
                 var error = new CenControlError
                 {
-                    tipo = "C",
-                    descripcion = ex.Message
+                    Tipo = "C",
+                    Descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
                 return BadRequest(error);

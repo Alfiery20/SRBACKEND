@@ -8,11 +8,11 @@ namespace CEN
 {
     public class CenCompra
     {
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string fechaSolicitud { get; set; }
-        public string fechaEntrega { get; set; }
-        public string direccionEntrega { get; set; }
-        public int idCondado { get; set; }
+        public int? Id { get; set; }
+        public string? Codigo { get; set; }
+        public string? FechaSolicitud { get; set; }
+        public string? FechaEntrega { get; set; }
+        public string? DireccionEntrega { get; set; }
+        public int? IdCondado { get; set; }
     }
 }

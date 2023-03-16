@@ -20,18 +20,17 @@ namespace CAD
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
-            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
             List<CenCategoria> lista = new List<CenCategoria>();
             try
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_obtenerCategorias", _sqlConexion);
-                cmd.Parameters.AddWithValue("@pcodigo_Categoria", request.codigo == null ? null : request.codigo.Trim());
-                cmd.Parameters.AddWithValue("@pnombre_Categoria", request.nombre == null ? null : request.nombre.Trim());
-                cmd.Parameters.AddWithValue("@ptipo_Busqueda", request.tipoBusqueda == null ? null : request.tipoBusqueda.Trim());
-                cmd.Parameters.AddWithValue("@ppage", request.pagina);
-                cmd.Parameters.AddWithValue("@pcount", request.cantidad);
+                cmd.Parameters.AddWithValue("@pcodigo_Categoria", request.Codigo == null ? null : request.Codigo.Trim());
+                cmd.Parameters.AddWithValue("@pnombre_Categoria", request.Nombre == null ? null : request.Nombre.Trim());
+                cmd.Parameters.AddWithValue("@ppage", request.Pagina);
+                cmd.Parameters.AddWithValue("@pcount", request.Cantidad);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -42,14 +41,15 @@ namespace CAD
                             {
                                 Id = Int32.Parse(reader["id_Categoria"].ToString()),
                                 Codigo = reader["codigo_Categoria"].ToString(),
-                                Nombre = reader["nombre_Categoria"].ToString()
+                                Nombre = reader["nombre_Categoria"].ToString(),
+                                Estado = reader["estado_Categoria"].ToString()
                             }
                         );
                     }
                 }
-                response.descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
-                response.tipo = "R";
-                response.objeto = lista;
+                response.Descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Tipo = "R";
+                response.Objeto = lista;
                 return response;
             }
             catch (System.Exception)
@@ -66,14 +66,14 @@ namespace CAD
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
-            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
             try
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudCategoria", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@pid_Categoria", cenCategoria.id));
-                cmd.Parameters.Add(new SqlParameter("@pnombre_Categoria", cenCategoria.nombre == null ? null : cenCategoria.nombre.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pid_Categoria", cenCategoria.Id));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_Categoria", cenCategoria.Nombre == null ? null : cenCategoria.Nombre.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@paccion", acccion));
 
 
@@ -82,9 +82,9 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.tipo = acccion;
-                        response.codigo = reader["CODIGO"].ToString();
-                        response.descripcion = reader["MENSAJE"].ToString();
+                        response.Tipo = acccion;
+                        response.Codigo = reader["CODIGO"].ToString();
+                        response.Descripcion = reader["MENSAJE"].ToString();
                     }
                 }
                 return response;
@@ -102,7 +102,7 @@ namespace CAD
         public CenControlError ObtenerCategoria(int id)
         {
             CenControlError response = new();
-            SqlConnection _sqlConexion = new(Constants.cadena_conexion);
+            SqlConnection _sqlConexion = new(Constants.Cadena_conexion);
             SqlCommand cmd;
             CenCategoria categoria = new();
 
@@ -122,9 +122,9 @@ namespace CAD
                         categoria.Estado = reader["estado_Categoria"].ToString();
                     }
 
-                response.descripcion = string.IsNullOrEmpty(categoria.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
-                response.tipo = "R";
-                response.objeto = categoria;
+                response.Descripcion = string.IsNullOrEmpty(categoria.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
+                response.Tipo = "R";
+                response.Objeto = categoria;
                 return response;
             }
             catch (System.Exception)

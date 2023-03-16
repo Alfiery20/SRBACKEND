@@ -16,15 +16,15 @@ namespace CLN
         public CenControlError IudUsuario(IUDUsuario request, string accion)
         {
             CadUsuario c = new CadUsuario();
-            request.clave = request.clave == null ? null : request.clave.Trim();
-            request.clave = EncrypAES.EncryptStringAES(request.clave, Constants.clave_encriptacion);
+            request.Clave = request.Clave == null ? null : request.Clave.Trim();
+            request.Clave = EncrypAES.EncryptStringAES(request.Clave, Constants.Clave_encriptacion);
             return c.IUDUsuario(request, accion);
         }
         public CenControlError ValidarUsuario(LoginRequest request)
         {
             CadUsuario c = new CadUsuario();
-            request.clave = request.clave == null ? null : request.clave.Trim();
-            request.clave = EncrypAES.EncryptStringAES(request.clave, Constants.clave_encriptacion);
+            request.Clave = request.Clave == null ? null : request.Clave.Trim();
+            request.Clave = EncrypAES.EncryptStringAES(request.Clave, Constants.Clave_encriptacion);
             return c.ValidadUsuario(request);
         }
         public CenControlError InsertToken(InsertTokenRequest request)

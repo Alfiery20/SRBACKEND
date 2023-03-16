@@ -8,7 +8,7 @@ namespace CEN.Request
 {
     public class LoginRequest
     {
-        public string? correoElectronico { get; set; }
-        public string? clave { get; set; }
+        public string? CorreoElectronico { get; set; }
+        public string? Clave { get; set; }
     }
 }

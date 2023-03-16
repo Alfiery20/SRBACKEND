@@ -20,20 +20,20 @@ namespace CAD
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
-            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
             try
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudUsuario", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@pid", iUDUsuario.id));
-                cmd.Parameters.Add(new SqlParameter("@pnumero_Documento", iUDUsuario.numerDocumento == null ? null : iUDUsuario.numerDocumento.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pnombre", iUDUsuario.nombreCompleto == null ? null : iUDUsuario.nombreCompleto.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@papellido_Paterno", iUDUsuario.apelliPaterno == null ? null : iUDUsuario.apelliPaterno.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@papellido_Materno", iUDUsuario.apelliMaterno == null ? null : iUDUsuario.apelliMaterno.Trim() ));
-                cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", iUDUsuario.correElectronico == null ? null : iUDUsuario.correElectronico.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pclave", iUDUsuario.clave));
-                cmd.Parameters.Add(new SqlParameter("@ptoken", iUDUsuario.token));
+                cmd.Parameters.Add(new SqlParameter("@pid", iUDUsuario.Id));
+                cmd.Parameters.Add(new SqlParameter("@pnumero_Documento", iUDUsuario.NumerDocumento == null ? null : iUDUsuario.NumerDocumento.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pnombre", iUDUsuario.NombreCompleto == null ? null : iUDUsuario.NombreCompleto.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@papellido_Paterno", iUDUsuario.ApelliPaterno == null ? null : iUDUsuario.ApelliPaterno.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@papellido_Materno", iUDUsuario.ApelliMaterno == null ? null : iUDUsuario.ApelliMaterno.Trim() ));
+                cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", iUDUsuario.CorreElectronico == null ? null : iUDUsuario.CorreElectronico.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pclave", iUDUsuario.Clave));
+                cmd.Parameters.Add(new SqlParameter("@ptoken", iUDUsuario.Token));
                 cmd.Parameters.Add(new SqlParameter("@paccion", acccion));
 
 
@@ -42,9 +42,9 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.tipo = acccion;
-                        response.codigo = reader["CODIGO"].ToString();
-                        response.descripcion = reader["MENSAJE"].ToString();
+                        response.Tipo = acccion;
+                        response.Codigo = reader["CODIGO"].ToString();
+                        response.Descripcion = reader["MENSAJE"].ToString();
                     }
                 }
                 return response;
@@ -62,23 +62,23 @@ namespace CAD
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
-            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
             try
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_obtenerUsuario", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", loginRequest.correoElectronico == null ? null : loginRequest.correoElectronico.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pclave", loginRequest.clave));
+                cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", loginRequest.CorreoElectronico == null ? null : loginRequest.CorreoElectronico.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pclave", loginRequest.Clave));
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        response.codigo = reader["CODIGO"].ToString();
-                        response.descripcion = reader["MENSAJE"].ToString();
-                        response.objeto = new UsuarioResponse {
+                        response.Codigo = reader["CODIGO"].ToString();
+                        response.Descripcion = reader["MENSAJE"].ToString();
+                        response.Objeto = new UsuarioResponse {
                                                 Id = int.Parse(reader["ID"].ToString()),
                                                 Codigo = reader["CODIGO"].ToString(),
                                                 Nombre = reader["NOMBRE"].ToString(),
@@ -103,7 +103,7 @@ namespace CAD
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
-            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
             try
             {
@@ -117,7 +117,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.codigo = reader["CODIGO"].ToString();
+                        response.Codigo = reader["CODIGO"].ToString();
                     }
                 }
                 return response;

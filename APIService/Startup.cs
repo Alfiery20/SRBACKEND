@@ -86,12 +86,12 @@ namespace APIService
              .AddEnvironmentVariables()
              .Build();
 
-            Constants.server_name = this.Configuration.GetValue<String>("SQLConexion:server_name");
-            Constants.database_name = this.Configuration.GetValue<String>("SQLConexion:database_name");
-            Constants.user_name = this.Configuration.GetValue<String>("SQLConexion:user_name");
-            Constants.user_pass = this.Configuration.GetValue<String>("SQLConexion:user_pass");
-            Constants.cadena_conexion = $"data source = {Constants.server_name}; initial catalog = {Constants.database_name}; user id = {Constants.user_name}; password = {Constants.user_pass}; TrustServerCertificate=True";
-            Constants.clave_encriptacion = this.Configuration.GetValue<String>("clave_encriptacion");
+            Constants.Server_name = this.Configuration.GetValue<String>("SQLConexion:server_name");
+            Constants.Database_name = this.Configuration.GetValue<String>("SQLConexion:database_name");
+            Constants.User_name = this.Configuration.GetValue<String>("SQLConexion:user_name");
+            Constants.User_pass = this.Configuration.GetValue<String>("SQLConexion:user_pass");
+            Constants.Cadena_conexion = $"data source = {Constants.Server_name}; initial catalog = {Constants.Database_name}; user id = {Constants.User_name}; password = {Constants.User_pass}; TrustServerCertificate=True";
+            Constants.Clave_encriptacion = this.Configuration.GetValue<String>("clave_encriptacion");
         }
     }
 }

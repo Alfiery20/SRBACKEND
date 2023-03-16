@@ -8,7 +8,7 @@ namespace CEN.Request
 {
     public class InsertTokenRequest
     {
-        public string Correo { get; set; }
-        public string Token { get; set; }
+        public string? Correo { get; set; }
+        public string? Token { get; set; }
     }
 }

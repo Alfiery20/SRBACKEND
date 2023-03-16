@@ -8,11 +8,11 @@ namespace CEN.Helpers
 {
     public static class Constants
     {
-        public static string server_name { get; set; }
-        public static string database_name { get; set; }
-        public static string user_name { get; set; }
-        public static string user_pass { get; set; }
-        public static string cadena_conexion { get; set; }
-        public static string clave_encriptacion { get; set; }
+        public static string? Server_name { get; set; }
+        public static string? Database_name { get; set; }
+        public static string? User_name { get; set; }
+        public static string? User_pass { get; set; }
+        public static string? Cadena_conexion { get; set; }
+        public static string? Clave_encriptacion { get; set; }
     }
 }

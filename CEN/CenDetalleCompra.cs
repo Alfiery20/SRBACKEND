@@ -8,10 +8,10 @@ namespace CEN
 {
     public class CenDetalleCompra
     {
-        public int id { get; set; }
-        public int cantidad { get; set; }
-        public double subtotal { get; set; }
-        public int idProducto { get; set; }
-        public int idCompra { get; set; }
+        public int? Id { get; set; }
+        public int? Cantidad { get; set; }
+        public double? subtotal { get; set; }
+        public int? IdProducto { get; set; }
+        public int? IdCompra { get; set; }
     }
 }

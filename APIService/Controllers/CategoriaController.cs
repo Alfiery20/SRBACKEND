@@ -26,8 +26,8 @@ namespace APIService.Controllers
                 ClnControlError obj = new ClnControlError();
                 var error = new CenControlError
                 {
-                    tipo = "R",
-                    descripcion = ex.Message
+                    Tipo = "R",
+                    Descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
                 return BadRequest(error);
@@ -48,8 +48,8 @@ namespace APIService.Controllers
                 ClnControlError obj = new ClnControlError();
                 var error = new CenControlError
                 {
-                    tipo = "C",
-                    descripcion = ex.Message
+                    Tipo = "C",
+                    Descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
                 return BadRequest(error);
@@ -70,8 +70,8 @@ namespace APIService.Controllers
                 ClnControlError obj = new ClnControlError();
                 var error = new CenControlError
                 {
-                    tipo = "C",
-                    descripcion = ex.Message
+                    Tipo = "C",
+                    Descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
                 return BadRequest(error);
@@ -92,16 +92,16 @@ namespace APIService.Controllers
                 ClnControlError obj = new ClnControlError();
                 var error = new CenControlError
                 {
-                    tipo = "C",
-                    descripcion = ex.Message
+                    Tipo = "C",
+                    Descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
                 return BadRequest(error);
             }
         }
 
-        [HttpPost("obtenerCategoria")]
-        public IActionResult ObtenerCategoria([FromBody] int id)
+        [HttpGet("obtenerCategoria/{id}")]
+        public IActionResult ObtenerCategoria(int id)
         {
             try
             {
@@ -114,8 +114,8 @@ namespace APIService.Controllers
                 ClnControlError obj = new ClnControlError();
                 var error = new CenControlError
                 {
-                    tipo = "R",
-                    descripcion = ex.Message
+                    Tipo = "R",
+                    Descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
                 return BadRequest(error);

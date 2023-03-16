@@ -17,21 +17,21 @@ namespace CAD
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
-            _sqlConexion = new SqlConnection(Constants.cadena_conexion);
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd; // comando para certificado
             try
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_insertControlError", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@ptipoError", request.tipo));
-                cmd.Parameters.Add(new SqlParameter("@pdescripcion", request.descripcion));
+                cmd.Parameters.Add(new SqlParameter("@ptipoError", request.Tipo));
+                cmd.Parameters.Add(new SqlParameter("@pdescripcion", request.Descripcion));
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        response.tipo = reader["CODIGO"].ToString();
-                        response.descripcion = reader["DESCRIPCION"].ToString();
+                        response.Tipo = reader["CODIGO"].ToString();
+                        response.Descripcion = reader["DESCRIPCION"].ToString();
                     }
                 }
             }

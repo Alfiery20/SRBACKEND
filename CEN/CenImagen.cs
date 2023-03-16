@@ -8,9 +8,9 @@ namespace CEN
 {
     public class CenImagen
     {
-        public int id { get; set; }
-        public string nombreOriginal { get; set; }
-        public string nombrePresenta { get; set; }
-        public string descripcion { get; set; }
+        public int? Id { get; set; }
+        public string? NombreOriginal { get; set; }
+        public string? NombrePresenta { get; set; }
+        public string? Descripcion { get; set; }
     }
 }

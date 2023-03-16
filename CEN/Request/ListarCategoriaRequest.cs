@@ -8,10 +8,9 @@ namespace CEN.Request
 {
     public class ListarCategoriaRequest
     {
-        public string? codigo { get; set; }
-        public string? nombre { get; set; }
-        public string? tipoBusqueda { get; set; }
-        public int pagina { get; set; }
-        public int cantidad { get; set; }
+        public string? Codigo { get; set; }
+        public string? Nombre { get; set; }
+        public int? Pagina { get; set; }
+        public int? Cantidad { get; set; }
     }
 }

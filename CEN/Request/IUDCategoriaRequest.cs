@@ -8,7 +8,7 @@ namespace CEN.Request
 {
     public class IUDCategoriaRequest
     {
-        public int? id { get; set; }
-        public string? nombre { get; set; }
+        public int? Id { get; set; }
+        public string? Nombre { get; set; }
     }
 }

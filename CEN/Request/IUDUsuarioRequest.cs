@@ -8,13 +8,13 @@ namespace CEN.Request
 {
     public class IUDUsuario
     {
-        public int id { get; set; }
-        public string? numerDocumento { get; set; }
-        public string? nombreCompleto { get; set; }
-        public string? apelliPaterno { get; set; }
-        public string? apelliMaterno { get; set; }
-        public string? correElectronico { get; set; }
-        public string? clave { get; set; }
-        public string? token { get; set;}
+        public int? Id { get; set; }
+        public string? NumerDocumento { get; set; }
+        public string? NombreCompleto { get; set; }
+        public string? ApelliPaterno { get; set; }
+        public string? ApelliMaterno { get; set; }
+        public string? CorreElectronico { get; set; }
+        public string? Clave { get; set; }
+        public string? Token { get; set;}
     }
 }
