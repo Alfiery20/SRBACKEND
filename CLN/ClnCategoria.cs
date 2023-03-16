@@ -11,15 +11,20 @@ namespace CLN
 {
     public class ClnCategoria
     {
-        public CenControlError listarCategoria(ListarCategoriaRequest request)
+        public CenControlError ListarCategoria(ListarCategoriaRequest request)
         {
             CadCategoria c = new CadCategoria();
-            return c.listarCategoria(request);
+            return c.ListarCategoria(request);
         }
         public CenControlError IudCtegoria(IUDCategoriaRequest request, string accion)
         {
             CadCategoria c = new CadCategoria();
             return c.IUDCategoria(request, accion);
+        }
+        public CenControlError ObtenerCategoria(int id)
+        {
+            CadCategoria c = new();
+            return c.ObtenerCategoria(id);
         }
     }
 }

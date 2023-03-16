@@ -12,13 +12,13 @@ namespace APIService.Controllers
     [ApiController]
     public class CategoriaController : ControllerBase
     {
-        [HttpGet("listarCategorias")]
+        [HttpPost("listarCategorias")]
         public IActionResult ListarCategorias([FromBody] ListarCategoriaRequest listarCategoriaRequest)
         {
             try
             {
                 ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.listarCategoria(listarCategoriaRequest);
+                var request = clnCategoria.ListarCategoria(listarCategoriaRequest);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -93,6 +93,28 @@ namespace APIService.Controllers
                 var error = new CenControlError
                 {
                     tipo = "C",
+                    descripcion = ex.Message
+                };
+                obj.InsertControlError(error);
+                return BadRequest(error);
+            }
+        }
+
+        [HttpPost("obtenerCategoria")]
+        public IActionResult ObtenerCategoria([FromBody] int id)
+        {
+            try
+            {
+                ClnCategoria clnCategoria = new ClnCategoria();
+                var request = clnCategoria.ObtenerCategoria(id);
+                return Ok(request);
+            }
+            catch (Exception ex)
+            {
+                ClnControlError obj = new ClnControlError();
+                var error = new CenControlError
+                {
+                    tipo = "R",
                     descripcion = ex.Message
                 };
                 obj.InsertControlError(error);
