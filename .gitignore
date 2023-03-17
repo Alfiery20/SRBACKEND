@@ -77,3 +77,16 @@
 /APIService/obj/Debug/net7.0/APIService.csproj.CoreCompileInputs.cache
 /CAD/obj/Debug/net7.0/CAD.csproj.CoreCompileInputs.cache
 /.vs/SumqaRumi/v17/.suo
+*.vsidx
+/APIService/obj/APIService.csproj.nuget.dgspec.json
+/APIService/obj/project.assets.json
+/APIService/obj/APIService.csproj.nuget.g.props
+/APIService/obj/project.nuget.cache
+/CAD/obj/CAD.csproj.nuget.dgspec.json
+/CAD/obj/CAD.csproj.nuget.g.props
+/CAD/obj/project.assets.json
+/CAD/obj/project.nuget.cache
+/.vs/SumqaRumi/FileContentIndex/b026e81a-482e-40fc-a339-fc14621dd0ac.vsidx
+/.vs/SumqaRumi/FileContentIndex/cd992fd4-7220-48d3-afe4-f27e13dc8a12.vsidx
+/.vs/SumqaRumi/FileContentIndex/ec5b4637-b6aa-4f5c-bd15-dac5afde564a.vsidx
+/.vs/SumqaRumi/FileContentIndex/f38865b7-85ef-4b9e-b49f-852e35584421.vsidx
