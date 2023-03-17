@@ -10,15 +10,15 @@ namespace APIService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriaController : ControllerBase
+    public class MaterialController : ControllerBase
     {
-        [HttpPost("listarCategorias")]
-        public IActionResult ListarCategorias([FromBody] ListarCategoriaRequest listarCategoriaRequest)
+        [HttpPost("listarMaterial")]
+        public IActionResult ListarMaterial([FromBody] ListarMaterialRequest listarMaterialRequest)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.ListarCategoria(listarCategoriaRequest);
+                ClnMaterial clnMaterial = new ClnMaterial();
+                var request = clnMaterial.ListarMaterial(listarMaterialRequest);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -34,13 +34,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpPost("agregarCategoria")]
-        public IActionResult AddCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
+        [HttpPost("agregarMaterial")]
+        public IActionResult AddMaterial([FromBody] IUDMaterialRequest iUDMaterial)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.IudCategoria(iUDCategoria, "I");
+                ClnMaterial clnMaterial = new ClnMaterial();
+                var request = clnMaterial.IudMaterial(iUDMaterial, "I");
                 return Ok(request);
             }
             catch (Exception ex)
@@ -56,13 +56,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpPut("editarCategoria")]
-        public IActionResult EditCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
+        [HttpPut("editarMaterial")]
+        public IActionResult EditMaterial([FromBody] IUDMaterialRequest iUDMaterial)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.IudCategoria(iUDCategoria, "U");
+                ClnMaterial clnMaterial = new ClnMaterial();
+                var request = clnMaterial.IudMaterial(iUDMaterial, "U");
                 return Ok(request);
             }
             catch (Exception ex)
@@ -78,13 +78,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpDelete("eliminarCategoria")]
-        public IActionResult DelCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
+        [HttpDelete("eliminarMaterial")]
+        public IActionResult DelMaterial([FromBody] IUDMaterialRequest iUDMaterial)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.IudCategoria(iUDCategoria, "D");
+                ClnMaterial clnMaterial = new ClnMaterial();
+                var request = clnMaterial.IudMaterial(iUDMaterial, "D");
                 return Ok(request);
             }
             catch (Exception ex)
@@ -100,13 +100,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpGet("obtenerCategoria/{id}")]
-        public IActionResult ObtenerCategoria(int id)
+        [HttpGet("obtenerMaterial/{id}")]
+        public IActionResult ObtenerMaterial(int id)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.ObtenerCategoria(id);
+                ClnMaterial clnMaterial = new ClnMaterial();
+                var request = clnMaterial.ObtenerMaterial(id);
                 return Ok(request);
             }
             catch (Exception ex)

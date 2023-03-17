@@ -16,7 +16,7 @@ namespace CLN
             CadCategoria c = new CadCategoria();
             return c.ListarCategoria(request);
         }
-        public CenControlError IudCtegoria(IUDCategoriaRequest request, string accion)
+        public CenControlError IudCategoria(IUDCategoriaRequest request, string accion)
         {
             CadCategoria c = new CadCategoria();
             return c.IUDCategoria(request, accion);
