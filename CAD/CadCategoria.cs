@@ -11,6 +11,7 @@ using CEN.Request;
 using CEN.Helpers;
 using System.Collections;
 using Microsoft.AspNetCore.Mvc;
+using CEN.Categoria;
 
 namespace CAD
 {
