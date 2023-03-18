@@ -77,3 +77,8 @@
 /APIService/obj/Debug/net7.0/APIService.csproj.CoreCompileInputs.cache
 /CAD/obj/Debug/net7.0/CAD.csproj.CoreCompileInputs.cache
 /.vs/SumqaRumi/v17/.suo
+*.vsidx
+*.vsidx
+*.dll
+*.pdb
+APIService/bin/Debug/net7.0/CAD.dll

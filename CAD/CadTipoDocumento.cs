@@ -79,7 +79,7 @@ namespace CAD
                 cmd = new SqlCommand("sp_iudTipoDocumento", _sqlConexion);
                 cmd.Parameters.Add(new SqlParameter("@pid_TipoDocumento", null));
                 cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", AgregarTipoDocumento.Nombre == null ? null : AgregarTipoDocumento.Nombre.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", AgregarTipoDocumento.LongitudMax == null ? null : AgregarTipoDocumento.LongitudMax));
+                cmd.Parameters.Add(new SqlParameter("@plongitud_Max", AgregarTipoDocumento.LongitudMax == null ? null : AgregarTipoDocumento.LongitudMax));
                 cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
@@ -117,7 +117,7 @@ namespace CAD
                 cmd = new SqlCommand("sp_iudTipoDocumento", _sqlConexion);
                 cmd.Parameters.Add(new SqlParameter("@pid_TipoDocumento", EditarTipoDocumento.Id == null ? null : EditarTipoDocumento.Id));
                 cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", EditarTipoDocumento.Nombre == null ? null : EditarTipoDocumento.Nombre.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", EditarTipoDocumento.LongitudMax == null ? null : EditarTipoDocumento.LongitudMax));
+                cmd.Parameters.Add(new SqlParameter("@plongitud_Max", EditarTipoDocumento.LongitudMax == null ? null : EditarTipoDocumento.LongitudMax));
                 cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
@@ -155,7 +155,7 @@ namespace CAD
                 cmd = new SqlCommand("sp_iudTipoDocumento", _sqlConexion);
                 cmd.Parameters.Add(new SqlParameter("@pid_TipoDocumento", EliminarTipoDocumento.Id == null ? null : EliminarTipoDocumento.Id));
                 cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", null));
-                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", null));
+                cmd.Parameters.Add(new SqlParameter("@plongitud_Max", null));
                 cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
