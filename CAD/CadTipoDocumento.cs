@@ -1,4 +1,6 @@
-﻿using CEN.Request;
+﻿using CEN.TipoDocumento;
+using CEN.Helpers;
+using CEN.Request;
 using CEN;
 using System;
 using System.Collections.Generic;
@@ -7,27 +9,25 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CEN.Helpers;
-using CEN.Material;
 
 namespace CAD
 {
-    public class CadMaterial
+    public class CadTipoDocumento
     {
-        public CenControlError ListarMateriales(ListarMaterialRequest request)
+        public CenControlError ListarTipoDocumento(ListarTipoDocumentoRequest request)
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
-            List<CenMaterial> lista = new List<CenMaterial>();
+            List<CenTipoDocumento> lista = new List<CenTipoDocumento>();
             try
             {
                 _sqlConexion.Open();
-                cmd = new SqlCommand("sp_obtenerMateriales", _sqlConexion);
-                cmd.Parameters.AddWithValue("@pcodigo_Material", request.Codigo == null ? null : request.Codigo.Trim());
-                cmd.Parameters.AddWithValue("@pnombre_Material", request.Nombre == null ? null : request.Nombre.Trim());
-                cmd.Parameters.AddWithValue("@ppage", request.Pagina);
+                cmd = new SqlCommand("sp_obtenerTipoDocumentos", _sqlConexion);
+                cmd.Parameters.AddWithValue("@pcodigo_TipoDocumento", request.Codigo == null ? null : request.Codigo.Trim());
+                cmd.Parameters.AddWithValue("@pnombre_TipoDocumento", request.Nombre == null ? null : request.Nombre.Trim());
+                cmd.Parameters.AddWithValue("@ppage", request.Page);
                 cmd.Parameters.AddWithValue("@pcount", request.Cantidad);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
@@ -35,13 +35,13 @@ namespace CAD
                     while (reader.Read())
                     {
                         lista.Add(
-                            new CenMaterial()
+                            new CenTipoDocumento()
                             {
-                                Id = Int32.Parse(reader["id_Material"].ToString()),
-                                Codigo = reader["codigo_Material"].ToString(),
-                                Nombre = reader["nombre_Material"].ToString(),
-                                Descripcion = reader["descripcion_Material"].ToString(),
-                                Estado = reader["estado_Material"].ToString()
+                                Id = Int32.Parse(reader["id_TipoDocumento"].ToString()),
+                                Codigo = reader["codigo_TipoDocumento"].ToString(),
+                                Nombre = reader["nombre_TipoDocumento"].ToString(),
+                                LongitudMax = Int32.Parse(reader["longitud_Max"].ToString()),
+                                EstadoDocumento = reader["estado_TipoDocumento"].ToString()
                             }
                         );
                     }
@@ -50,9 +50,9 @@ namespace CAD
                 response.Tipo = "R";
                 response.Objeto = new Paginado
                 {
-                    Pagina = request.Pagina,
+                    Pagina = request.Page,
                     Tamanio = request.Cantidad,
-                    Total_Resultados = ContarMateriales(request),
+                    Total_Resultados = ContarTipoDocumento(request),
                     Data = lista
                 };
                 return response;
@@ -66,10 +66,9 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
-
-        public CenControlError AgregarMaterial(CenAgregarMaterial AgregarMaterial)
+        public CenControlError AgregarTipoDocumento(CenAgregarTipoDocumento AgregarTipoDocumento)
         {
-            string Accion = "I";
+            string accion = "I";
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
@@ -77,11 +76,11 @@ namespace CAD
             try
             {
                 _sqlConexion.Open();
-                cmd = new SqlCommand("sp_iudMaterial", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@pid_Material", null));
-                cmd.Parameters.Add(new SqlParameter("@pnombre_Material", AgregarMaterial.Nombre == null ? null : AgregarMaterial.Nombre.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pdescripcion_Material", AgregarMaterial.Descripcion == null ? null : AgregarMaterial.Descripcion.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@paccion", Accion));
+                cmd = new SqlCommand("sp_iudTipoDocumento", _sqlConexion);
+                cmd.Parameters.Add(new SqlParameter("@pid_TipoDocumento", null));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", AgregarTipoDocumento.Nombre == null ? null : AgregarTipoDocumento.Nombre.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", AgregarTipoDocumento.LongitudMax == null ? null : AgregarTipoDocumento.LongitudMax));
+                cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -89,7 +88,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Tipo = Accion;
+                        response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
                     }
@@ -105,9 +104,9 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
-        public CenControlError EditarMaterial(CenEditarMaterial EditarMaterial)
+        public CenControlError EditarTipoDocumento(CenEditarTipoDocumento EditarTipoDocumento)
         {
-            string Accion = "U";
+            string accion = "U";
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
@@ -115,11 +114,11 @@ namespace CAD
             try
             {
                 _sqlConexion.Open();
-                cmd = new SqlCommand("sp_iudMaterial", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@pid_Material", EditarMaterial.Id == null ? null : EditarMaterial.Id));
-                cmd.Parameters.Add(new SqlParameter("@pnombre_Material", EditarMaterial.Nombre == null ? null : EditarMaterial.Nombre.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pdescripcion_Material", EditarMaterial.Descripcion == null ? null : EditarMaterial.Descripcion.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@paccion", Accion));
+                cmd = new SqlCommand("sp_iudTipoDocumento", _sqlConexion);
+                cmd.Parameters.Add(new SqlParameter("@pid_TipoDocumento", EditarTipoDocumento.Id == null ? null : EditarTipoDocumento.Id));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", EditarTipoDocumento.Nombre == null ? null : EditarTipoDocumento.Nombre.Trim()));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", EditarTipoDocumento.LongitudMax == null ? null : EditarTipoDocumento.LongitudMax));
+                cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -127,7 +126,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Tipo = Accion;
+                        response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
                     }
@@ -143,9 +142,9 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
-        public CenControlError EliminarMaterial(CenEliminarMaterial EliminarMaterial)
+        public CenControlError EliminarTipoDocumento(CenEliminarTipoDocumento EliminarTipoDocumento)
         {
-            string Accion = "D";
+            string accion = "D";
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
@@ -153,9 +152,11 @@ namespace CAD
             try
             {
                 _sqlConexion.Open();
-                cmd = new SqlCommand("sp_iudMaterial", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@pid_Material", EliminarMaterial.Id == null ? null : EliminarMaterial.Id));
-                cmd.Parameters.Add(new SqlParameter("@paccion", Accion));
+                cmd = new SqlCommand("sp_iudTipoDocumento", _sqlConexion);
+                cmd.Parameters.Add(new SqlParameter("@pid_TipoDocumento", EliminarTipoDocumento.Id == null ? null : EliminarTipoDocumento.Id));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", null));
+                cmd.Parameters.Add(new SqlParameter("@pnombre_TipoDocumento", null));
+                cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -163,7 +164,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Tipo = Accion;
+                        response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
                     }
@@ -179,33 +180,32 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
-        public CenControlError ObtenerMaterial(int id)
+        public CenControlError ObtenerTipoDocumento(int id)
         {
             CenControlError response = new();
             SqlConnection _sqlConexion = new(Constants.Cadena_conexion);
             SqlCommand cmd;
-            CenMaterial material = new();
+            CenTipoDocumento TipoDocumento = new();
 
             try
             {
                 _sqlConexion.Open();
-                cmd = new SqlCommand("sp_obtenerMaterial", _sqlConexion);
-                cmd.Parameters.AddWithValue("@pid_Material", id == 0 ? null : id);
+                cmd = new SqlCommand("sp_obtenerTipoDocumento", _sqlConexion);
+                cmd.Parameters.AddWithValue("@pid_TipoDocumento", id == 0 ? null : id);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
 
                     if (reader.Read())
                     {
-                        material.Id = Int32.Parse(reader["id_Material"].ToString());
-                        material.Codigo = reader["codigo_Material"].ToString();
-                        material.Nombre = reader["nombre_Material"].ToString();
-                        material.Estado = reader["estado_Material"].ToString();
-                        material.Descripcion = reader["descripcion_Material"].ToString();
+                        TipoDocumento.Id = Int32.Parse(reader["id_TipoDocumento"].ToString());
+                        TipoDocumento.Codigo = reader["codigo_TipoDocumento"].ToString();
+                        TipoDocumento.Nombre = reader["nombre_TipoDocumento"].ToString();
+                        TipoDocumento.EstadoDocumento = reader["estado_TipoDocumento"].ToString();
                     }
 
-                response.Descripcion = string.IsNullOrEmpty(material.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
+                response.Descripcion = string.IsNullOrEmpty(TipoDocumento.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
                 response.Tipo = "R";
-                response.Objeto = material;
+                response.Objeto = TipoDocumento;
                 return response;
             }
             catch (System.Exception)
@@ -217,20 +217,19 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
-
-        private int ContarMateriales(ListarMaterialRequest request)
+        private int ContarTipoDocumento(ListarTipoDocumentoRequest request)
         {
             int total = 0;
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
-            List<CenMaterial> lista = new List<CenMaterial>();
+            List<CenTipoDocumento> lista = new List<CenTipoDocumento>();
             try
             {
                 _sqlConexion.Open();
-                cmd = new SqlCommand("sp_ContarMateriales", _sqlConexion);
-                cmd.Parameters.AddWithValue("@pcodigo_Material", request.Codigo == null ? null : request.Codigo.Trim());
-                cmd.Parameters.AddWithValue("@pnombre_Material", request.Nombre == null ? null : request.Nombre.Trim());
+                cmd = new SqlCommand("sp_ContarTipoDocumentos", _sqlConexion);
+                cmd.Parameters.AddWithValue("@pcodigo_TipoDocumento", request.Codigo == null ? null : request.Codigo.Trim());
+                cmd.Parameters.AddWithValue("@pnombre_TipoDocumento", request.Nombre == null ? null : request.Nombre.Trim());
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var reader = cmd.ExecuteReader())
                 {

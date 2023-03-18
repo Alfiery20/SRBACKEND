@@ -1,5 +1,6 @@
 ﻿using CAD;
 using CEN;
+using CEN.Categoria;
 using CEN.Request;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,20 @@ namespace CLN
             CadCategoria c = new CadCategoria();
             return c.ListarCategoria(request);
         }
-        public CenControlError IudCategoria(IUDCategoriaRequest request, string accion)
+        public CenControlError AgregarCategoria(CenAgregarCategoria request)
         {
             CadCategoria c = new CadCategoria();
-            return c.IUDCategoria(request, accion);
+            return c.AgregarCategoria(request);
+        }
+        public CenControlError EditarCategoria(CenEditarCategoria request)
+        {
+            CadCategoria c = new CadCategoria();
+            return c.EditarCategoria(request);
+        }
+        public CenControlError EliminarCategoria(CenEliminarCategoria request)
+        {
+            CadCategoria c = new CadCategoria();
+            return c.EliminarCategoria(request);
         }
         public CenControlError ObtenerCategoria(int id)
         {

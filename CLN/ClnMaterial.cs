@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CEN.Material;
 
 namespace CLN
 {
@@ -16,10 +17,20 @@ namespace CLN
             CadMaterial c = new();
             return c.ListarMateriales(request);
         }
-        public CenControlError IudMaterial(IUDMaterialRequest request, string accion)
+        public CenControlError AgregarMaterial(CenAgregarMaterial request)
         {
             CadMaterial c = new();
-            return c.IUDMaterial(request, accion);
+            return c.AgregarMaterial(request);
+        }
+        public CenControlError EditarMaterial(CenEditarMaterial request)
+        {
+            CadMaterial c = new();
+            return c.EditarMaterial(request);
+        }
+        public CenControlError EliminarMaterial(CenEliminarMaterial request)
+        {
+            CadMaterial c = new();
+            return c.EliminarMaterial(request);
         }
         public CenControlError ObtenerMaterial(int id)
         {

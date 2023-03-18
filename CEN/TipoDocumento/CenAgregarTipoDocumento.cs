@@ -9,6 +9,6 @@ namespace CEN.TipoDocumento
     public class CenAgregarTipoDocumento
     {
         public string? Nombre { get; set; }
-        public string? LongitudMax { get; set; }
+        public int? LongitudMax { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace CEN.TipoDocumento
     {
         public int? Id { get; set; }
         public string? Nombre { get; set; }
-        public string? LongitudMax { get; set; }
+        public int? LongitudMax { get; set; }
     }
 }

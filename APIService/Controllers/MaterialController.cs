@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
+using CEN.Material;
 
 namespace APIService.Controllers
 {
@@ -35,12 +36,12 @@ namespace APIService.Controllers
         }
 
         [HttpPost("agregarMaterial")]
-        public IActionResult AddMaterial([FromBody] IUDMaterialRequest iUDMaterial)
+        public IActionResult AddMaterial([FromBody] CenAgregarMaterial AgregarMaterial)
         {
             try
             {
                 ClnMaterial clnMaterial = new ClnMaterial();
-                var request = clnMaterial.IudMaterial(iUDMaterial, "I");
+                var request = clnMaterial.AgregarMaterial(AgregarMaterial);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -57,12 +58,12 @@ namespace APIService.Controllers
         }
 
         [HttpPut("editarMaterial")]
-        public IActionResult EditMaterial([FromBody] IUDMaterialRequest iUDMaterial)
+        public IActionResult EditMaterial([FromBody] CenEditarMaterial EditarMaterial)
         {
             try
             {
                 ClnMaterial clnMaterial = new ClnMaterial();
-                var request = clnMaterial.IudMaterial(iUDMaterial, "U");
+                var request = clnMaterial.EditarMaterial(EditarMaterial);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -79,12 +80,12 @@ namespace APIService.Controllers
         }
 
         [HttpDelete("eliminarMaterial")]
-        public IActionResult DelMaterial([FromBody] IUDMaterialRequest iUDMaterial)
+        public IActionResult DelMaterial([FromBody] CenEliminarMaterial EliminarMaterial)
         {
             try
             {
                 ClnMaterial clnMaterial = new ClnMaterial();
-                var request = clnMaterial.IudMaterial(iUDMaterial, "D");
+                var request = clnMaterial.EliminarMaterial(EliminarMaterial);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -100,8 +101,8 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpGet("obtenerMaterial/{id}")]
-        public IActionResult ObtenerMaterial(int id)
+        [HttpGet("obtenerMaterial")]
+        public IActionResult ObtenerMaterial([FromQuery] int id)
         {
             try
             {

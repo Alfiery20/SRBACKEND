@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
+using CEN.Categoria;
 
 namespace APIService.Controllers
 {
@@ -35,12 +36,12 @@ namespace APIService.Controllers
         }
 
         [HttpPost("agregarCategoria")]
-        public IActionResult AddCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
+        public IActionResult AddCategoria([FromBody] CenAgregarCategoria AgregarCategoria)
         {
             try
             {
                 ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.IudCategoria(iUDCategoria, "I");
+                var request = clnCategoria.AgregarCategoria(AgregarCategoria);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -57,12 +58,12 @@ namespace APIService.Controllers
         }
 
         [HttpPut("editarCategoria")]
-        public IActionResult EditCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
+        public IActionResult EditCategoria([FromBody] CenEditarCategoria EditarCategoria)
         {
             try
             {
                 ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.IudCategoria(iUDCategoria, "U");
+                var request = clnCategoria.EditarCategoria(EditarCategoria);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -79,12 +80,12 @@ namespace APIService.Controllers
         }
 
         [HttpDelete("eliminarCategoria")]
-        public IActionResult DelCategoria([FromBody] IUDCategoriaRequest iUDCategoria)
+        public IActionResult DelCategoria([FromBody] CenEliminarCategoria EliminarCategoria)
         {
             try
             {
                 ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.IudCategoria(iUDCategoria, "D");
+                var request = clnCategoria.EliminarCategoria(EliminarCategoria);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -100,8 +101,8 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpGet("obtenerCategoria/{id}")]
-        public IActionResult ObtenerCategoria(int id)
+        [HttpGet("obtenerCategoria")]
+        public IActionResult ObtenerCategoria([FromQuery] int id)
         {
             try
             {
