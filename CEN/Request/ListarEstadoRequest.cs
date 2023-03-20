@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CEN
+namespace CEN.Request
 {
-    public class CenEstado
+    public class ListarEstadoRequest
     {
-        public int? Id { get; set; }
-        public string? Codigo { get; set; }
         public string? Nombre { get; set; }
     }
 }

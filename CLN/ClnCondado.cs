@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace CLN
 {
-    public class ClnControlError
+    public class ClnCondado
     {
-        public CenControlError InsertControlError(CenControlError request)
+        public CenControlError ListarCondado(ListarCondadoRequest request)
         {
-            CadControlError c = new();
-            return c.RegistrarControlError(request);
+            CadCondado c = new();
+            return c.ListarCondado(request);
         }
     }
 }

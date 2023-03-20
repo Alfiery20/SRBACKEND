@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CEN
+namespace CEN.Condado
 {
     public class CenCondado
     {

@@ -30,7 +30,7 @@ namespace CAD
                 cmd.Parameters.Add(new SqlParameter("@pnumero_Documento", iUDUsuario.NumerDocumento == null ? null : iUDUsuario.NumerDocumento.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pnombre", iUDUsuario.NombreCompleto == null ? null : iUDUsuario.NombreCompleto.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@papellido_Paterno", iUDUsuario.ApelliPaterno == null ? null : iUDUsuario.ApelliPaterno.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@papellido_Materno", iUDUsuario.ApelliMaterno == null ? null : iUDUsuario.ApelliMaterno.Trim() ));
+                cmd.Parameters.Add(new SqlParameter("@papellido_Materno", iUDUsuario.ApelliMaterno == null ? null : iUDUsuario.ApelliMaterno.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", iUDUsuario.CorreElectronico == null ? null : iUDUsuario.CorreElectronico.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pclave", iUDUsuario.Clave));
                 cmd.Parameters.Add(new SqlParameter("@ptoken", iUDUsuario.Token));
@@ -78,13 +78,15 @@ namespace CAD
                     {
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
-                        response.Objeto = new UsuarioResponse {
-                                                Id = int.Parse(reader["ID"].ToString()),
-                                                Codigo = reader["CODIGO"].ToString(),
-                                                Nombre = reader["NOMBRE"].ToString(),
-                                                ApellidoPaterno = reader["APELLIDO_PATERNO"].ToString(),
-                                                ApellidoMaterno = reader["APELLIDO_MATERNO"].ToString(),
-                                                CorreoElectronico = reader["CORREO_ELECTRONICO"].ToString()};
+                        response.Objeto = new UsuarioResponse
+                        {
+                            Id = int.Parse(reader["ID"].ToString()),
+                            Codigo = reader["CODIGO"].ToString(),
+                            Nombre = reader["NOMBRE"].ToString(),
+                            ApellidoPaterno = reader["APELLIDO_PATERNO"].ToString(),
+                            ApellidoMaterno = reader["APELLIDO_MATERNO"].ToString(),
+                            CorreoElectronico = reader["CORREO_ELECTRONICO"].ToString()
+                        };
                     }
                 }
                 return response;
