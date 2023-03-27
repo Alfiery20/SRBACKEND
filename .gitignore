@@ -109,3 +109,5 @@ APIService/bin/Debug/net7.0/CAD.dll
 /APIService/obj/project.assets.json
 /APIService/obj/project.nuget.cache
 /APIService/bin/Debug/net7.0/appsettings.Development.json
+*.dll
+*.pdb
