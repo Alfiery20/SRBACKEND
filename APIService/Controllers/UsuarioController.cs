@@ -2,6 +2,7 @@
 using CEN;
 using CEN.Request;
 using CEN.Response;
+using CEN.Usuario;
 using CLN;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -22,17 +23,17 @@ namespace APIService.Controllers
         private IConfiguration _configuration;
 
         public UsuarioController(IConfiguration configuration)
-        { 
+        {
             _configuration = configuration;
         }
 
         [HttpPost("registroUsuario")]
-        public IActionResult Register([FromBody] IUDUsuario iUDUsuario)
+        public IActionResult Register([FromBody] CenAgregarUsuario iUDUsuario)
         {
             try
             {
                 ClnUsuario clnUsuario = new ClnUsuario();
-                var request = clnUsuario.IudUsuario(iUDUsuario, "I");
+                var request = clnUsuario.AgregarUsuario(iUDUsuario);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -54,7 +55,7 @@ namespace APIService.Controllers
             {
                 ClnUsuario clnUsuario = new ClnUsuario();
                 var request = clnUsuario.ValidarUsuario(loginRequest);
-                if (request.Codigo == "1") 
+                if (request.Codigo == "1")
                 {
                     var jwt = _configuration.GetSection("jwt").Get<CenJWT>();
                     JwtSecurityToken token = TokenService.GenerarToken(jwt, (UsuarioResponse)request.Objeto);

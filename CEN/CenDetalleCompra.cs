@@ -13,5 +13,6 @@ namespace CEN
         public double? subtotal { get; set; }
         public int? IdProducto { get; set; }
         public int? IdCompra { get; set; }
+        public double? PrecioCompre { get; set; }
     }
 }
