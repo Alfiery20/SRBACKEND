@@ -14,22 +14,22 @@ namespace CLN
     {
         public CenControlError ListarTipoDocumento(ListarTipoDocumentoRequest request)
         {
-            CadTipoDocumento c = new CadTipoDocumento();
+            CadTipoDocumento c = new();
             return c.ListarTipoDocumento(request);
         }
         public CenControlError AgregarTipoDocumento(CenAgregarTipoDocumento request)
         {
-            CadTipoDocumento c = new CadTipoDocumento();
+            CadTipoDocumento c = new();
             return c.AgregarTipoDocumento(request);
         }
         public CenControlError EditarTipoDocumento(CenEditarTipoDocumento request)
         {
-            CadTipoDocumento c = new CadTipoDocumento();
+            CadTipoDocumento c = new();
             return c.EditarTipoDocumento(request);
         }
         public CenControlError EliminarTipoDocumento(CenEliminarTipoDocumento request)
         {
-            CadTipoDocumento c = new CadTipoDocumento();
+            CadTipoDocumento c = new();
             return c.EliminarTipoDocumento(request);
         }
         public CenControlError ObtenerTipoDocumento(int id)

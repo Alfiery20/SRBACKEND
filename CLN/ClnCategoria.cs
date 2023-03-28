@@ -14,22 +14,22 @@ namespace CLN
     {
         public CenControlError ListarCategoria(ListarCategoriaRequest request)
         {
-            CadCategoria c = new CadCategoria();
+            CadCategoria c = new();
             return c.ListarCategoria(request);
         }
         public CenControlError AgregarCategoria(CenAgregarCategoria request)
         {
-            CadCategoria c = new CadCategoria();
+            CadCategoria c = new();
             return c.AgregarCategoria(request);
         }
         public CenControlError EditarCategoria(CenEditarCategoria request)
         {
-            CadCategoria c = new CadCategoria();
+            CadCategoria c = new();
             return c.EditarCategoria(request);
         }
         public CenControlError EliminarCategoria(CenEliminarCategoria request)
         {
-            CadCategoria c = new CadCategoria();
+            CadCategoria c = new();
             return c.EliminarCategoria(request);
         }
         public CenControlError ObtenerCategoria(int id)

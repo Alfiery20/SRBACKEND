@@ -80,7 +80,7 @@ namespace APIService.Controllers
         }
 
         [HttpDelete("eliminarMaterial")]
-        public IActionResult DelMaterial([FromBody] CenEliminarMaterial EliminarMaterial)
+        public IActionResult DelMaterial([FromQuery] CenEliminarMaterial EliminarMaterial)
         {
             try
             {

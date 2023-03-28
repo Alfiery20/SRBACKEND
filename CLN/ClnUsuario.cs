@@ -16,21 +16,21 @@ namespace CLN
     {
         public CenControlError AgregarUsuario(CenAgregarUsuario request)
         {
-            CadUsuario c = new CadUsuario();
+            CadUsuario c = new();
             request.Clave = request.Clave == null ? null : request.Clave.Trim();
             request.Clave = EncrypAES.EncryptStringAES(request.Clave, Constants.Clave_encriptacion);
             return c.AgregarUsuario(request);
         }
         public CenControlError ValidarUsuario(LoginRequest request)
         {
-            CadUsuario c = new CadUsuario();
+            CadUsuario c = new();
             request.Clave = request.Clave == null ? null : request.Clave.Trim();
             request.Clave = EncrypAES.EncryptStringAES(request.Clave, Constants.Clave_encriptacion);
             return c.ValidadUsuario(request);
         }
         public CenControlError InsertToken(InsertTokenRequest request)
         {
-            CadUsuario c = new CadUsuario();
+            CadUsuario c = new();
             return c.InsertToken(request);
         }
     }

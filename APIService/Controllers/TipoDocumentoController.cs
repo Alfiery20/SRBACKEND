@@ -80,7 +80,7 @@ namespace APIService.Controllers
         }
 
         [HttpDelete("eliminarTipoDocumento")]
-        public IActionResult DelTipoDocumento([FromBody] CenEliminarTipoDocumento EliminarTipoDocumento)
+        public IActionResult DelTipoDocumento([FromQuery] CenEliminarTipoDocumento EliminarTipoDocumento)
         {
             try
             {

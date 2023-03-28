@@ -5,21 +5,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
-using CEN.Categoria;
+using CEN.Producto;
 
 namespace APIService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriaController : ControllerBase
+    public class ProductoController : ControllerBase
     {
-        [HttpPost("listarCategorias")]
-        public IActionResult ListarCategorias([FromBody] ListarCategoriaRequest listarCategoriaRequest)
+        [HttpPost("listarProductos")]
+        public IActionResult ListarProductos([FromBody] ListarProductoRequest listarProductoRequest)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.ListarCategoria(listarCategoriaRequest);
+                ClnProducto clnProducto = new ClnProducto();
+                var request = clnProducto.ListarProducto(listarProductoRequest);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -35,13 +35,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpPost("agregarCategoria")]
-        public IActionResult AddCategoria([FromBody] CenAgregarCategoria AgregarCategoria)
+        [HttpPost("agregarProducto")]
+        public IActionResult AddProducto([FromBody] CenAgregarProducto AgregarProducto)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.AgregarCategoria(AgregarCategoria);
+                ClnProducto clnProducto = new ClnProducto();
+                var request = clnProducto.AgregarProducto(AgregarProducto);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -57,13 +57,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpPut("editarCategoria")]
-        public IActionResult EditCategoria([FromBody] CenEditarCategoria EditarCategoria)
+        [HttpPut("editarProducto")]
+        public IActionResult EditProducto([FromBody] CenEditarProducto EditarProducto)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.EditarCategoria(EditarCategoria);
+                ClnProducto clnProducto = new ClnProducto();
+                var request = clnProducto.EditarProducto(EditarProducto);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -79,13 +79,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpDelete("eliminarCategoria")]
-        public IActionResult DelCategoria([FromQuery] CenEliminarCategoria EliminarCategoria)
+        [HttpDelete("eliminarProducto")]
+        public IActionResult DelProducto([FromQuery] CenEliminarProducto EliminarProducto)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.EliminarCategoria(EliminarCategoria);
+                ClnProducto clnProducto = new ClnProducto();
+                var request = clnProducto.EliminarProducto(EliminarProducto);
                 return Ok(request);
             }
             catch (Exception ex)
@@ -101,13 +101,13 @@ namespace APIService.Controllers
             }
         }
 
-        [HttpGet("obtenerCategoria")]
-        public IActionResult ObtenerCategoria([FromQuery] int id)
+        [HttpGet("obtenerProducto")]
+        public IActionResult ObtenerProducto([FromQuery] int id)
         {
             try
             {
-                ClnCategoria clnCategoria = new ClnCategoria();
-                var request = clnCategoria.ObtenerCategoria(id);
+                ClnProducto clnProducto = new ClnProducto();
+                var request = clnProducto.ObtenerProducto(id);
                 return Ok(request);
             }
             catch (Exception ex)

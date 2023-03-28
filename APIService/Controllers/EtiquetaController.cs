@@ -80,7 +80,7 @@ namespace APIService.Controllers
         }
 
         [HttpDelete("eliminarEtiqueta")]
-        public IActionResult DelEtiqueta([FromBody] CenEliminarEtiqueta EliminarEtiqueta)
+        public IActionResult DelEtiqueta([FromQuery] CenEliminarEtiqueta EliminarEtiqueta)
         {
             try
             {
