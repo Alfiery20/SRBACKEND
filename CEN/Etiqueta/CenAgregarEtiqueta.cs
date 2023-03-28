@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CEN.Request
+namespace CEN.Etiqueta
 {
-    public class IUDCategoriaRequest
+    public class CenAgregarEtiqueta
     {
-        public int? Id { get; set; }
         public string? Nombre { get; set; }
     }
 }

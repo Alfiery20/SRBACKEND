@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace CLN
 {
-    public class ClnControlError
+    public class ClnRol
     {
-        public CenControlError InsertControlError(CenControlError request)
+        public CenControlError ListarRolesDeUsuario(ListarRolDeUsuarioRequest request)
         {
-            CadControlError c = new();
-            return c.RegistrarControlError(request);
+            CadRol c = new();
+            return c.ListarRolDeUsuario(request);
         }
     }
 }

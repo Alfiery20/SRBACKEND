@@ -11,13 +11,15 @@ using System.Text;
 using System.Threading.Tasks;
 using CEN.Helpers;
 using Services.Encrypt;
+using CEN.Usuario;
 
 namespace CAD
 {
     public class CadUsuario
     {
-        public CenControlError IUDUsuario(IUDUsuario iUDUsuario, string acccion)
+        public CenControlError AgregarUsuario(CenAgregarUsuario iUDUsuario)
         {
+            String Accion = "I";
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
@@ -26,15 +28,15 @@ namespace CAD
             {
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudUsuario", _sqlConexion);
-                cmd.Parameters.Add(new SqlParameter("@pid", iUDUsuario.Id));
+                cmd.Parameters.Add(new SqlParameter("@pid", null));
                 cmd.Parameters.Add(new SqlParameter("@pnumero_Documento", iUDUsuario.NumerDocumento == null ? null : iUDUsuario.NumerDocumento.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pnombre", iUDUsuario.NombreCompleto == null ? null : iUDUsuario.NombreCompleto.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@papellido_Paterno", iUDUsuario.ApelliPaterno == null ? null : iUDUsuario.ApelliPaterno.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@papellido_Materno", iUDUsuario.ApelliMaterno == null ? null : iUDUsuario.ApelliMaterno.Trim() ));
+                cmd.Parameters.Add(new SqlParameter("@papellido_Materno", iUDUsuario.ApelliMaterno == null ? null : iUDUsuario.ApelliMaterno.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pcorreo_Electronico", iUDUsuario.CorreElectronico == null ? null : iUDUsuario.CorreElectronico.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pclave", iUDUsuario.Clave));
                 cmd.Parameters.Add(new SqlParameter("@ptoken", iUDUsuario.Token));
-                cmd.Parameters.Add(new SqlParameter("@paccion", acccion));
+                cmd.Parameters.Add(new SqlParameter("@paccion", Accion));
 
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -42,7 +44,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Tipo = acccion;
+                        response.Tipo = Accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
                     }
@@ -78,13 +80,15 @@ namespace CAD
                     {
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
-                        response.Objeto = new UsuarioResponse {
-                                                Id = int.Parse(reader["ID"].ToString()),
-                                                Codigo = reader["CODIGO"].ToString(),
-                                                Nombre = reader["NOMBRE"].ToString(),
-                                                ApellidoPaterno = reader["APELLIDO_PATERNO"].ToString(),
-                                                ApellidoMaterno = reader["APELLIDO_MATERNO"].ToString(),
-                                                CorreoElectronico = reader["CORREO_ELECTRONICO"].ToString()};
+                        response.Objeto = new UsuarioResponse
+                        {
+                            Id = int.Parse(reader["ID"].ToString()),
+                            Codigo = reader["CODIGO"].ToString(),
+                            Nombre = reader["NOMBRE"].ToString(),
+                            ApellidoPaterno = reader["APELLIDO_PATERNO"].ToString(),
+                            ApellidoMaterno = reader["APELLIDO_MATERNO"].ToString(),
+                            CorreoElectronico = reader["CORREO_ELECTRONICO"].ToString()
+                        };
                     }
                 }
                 return response;

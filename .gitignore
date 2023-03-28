@@ -109,6 +109,5 @@ APIService/bin/Debug/net7.0/CAD.dll
 /APIService/obj/project.assets.json
 /APIService/obj/project.nuget.cache
 /APIService/bin/Debug/net7.0/appsettings.Development.json
-/.vs/ProjectEvaluation/sumqarumi.metadata.v5.2
-/.vs/ProjectEvaluation/sumqarumi.projects.v5.2
-/.vs/SumqaRumi/v17/.futdcache.v2
+*.dll
+*.pdb
