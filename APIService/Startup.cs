@@ -92,6 +92,10 @@ namespace APIService
             Constants.User_pass = this.Configuration.GetValue<String>("SQLConexion:user_pass");
             Constants.Cadena_conexion = $"data source = {Constants.Server_name}; initial catalog = {Constants.Database_name}; user id = {Constants.User_name}; password = {Constants.User_pass}; TrustServerCertificate=True";
             Constants.Clave_encriptacion = this.Configuration.GetValue<String>("clave_encriptacion");
+            Constants.Cloud = this.Configuration.GetValue<String>("cloudinary:cloud");
+            Constants.Api_key = this.Configuration.GetValue<String>("cloudinary:api_key");
+            Constants.Api_secret = this.Configuration.GetValue<String>("cloudinary:api_secret");
+
         }
     }
 }

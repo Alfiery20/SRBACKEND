@@ -14,5 +14,8 @@ namespace CEN.Helpers
         public static string? User_pass { get; set; }
         public static string? Cadena_conexion { get; set; }
         public static string? Clave_encriptacion { get; set; }
+        public static string? Cloud { get; set; }
+        public static string? Api_key { get; set; }
+        public static string? Api_secret { get; set; }
     }
 }

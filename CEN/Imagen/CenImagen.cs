@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CEN
+namespace CEN.Imagen
 {
     public class CenImagen
     {
