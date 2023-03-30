@@ -49,24 +49,43 @@ namespace APIService.Controllers
                 string nombre = "SumaqRumi_" + (clnImagen.ObtenerCodigo(idProducto) + 1) + "_" + date;
                 int respuesta = CloudinayConexion.SubirArchivo(imagen, nombre);
                 CenAgregarImagen agregarimagen = new();
+                Console.WriteLine("AQUI LLEGUE 1");
                 if (respuesta == 1)
                 {
-                    var request = clnImagen.AgregarImagen(agregarimagen = new()
+                    Console.WriteLine("AQUI LLEGUE 2");
+                    agregarimagen = new()
                     {
                         Descripcion = descripcion,
                         NombreOriginal = imagen.FileName,
-                        NombrePresenta = nombre
-                    });
+                        NombrePresenta = nombre,
+                        IdProducto = idProducto
+                    };
+                    var request = clnImagen.AgregarImagen(agregarimagen);
+                    Console.WriteLine("AQUI LLEGUE 3");
                     if (request.Codigo != "OK")
                     {
                         CloudinayConexion.EliminarArchivo(nombre);
                     }
+                    Console.WriteLine("AQUI LLEGUE 4");
+                    return Ok(request);
                 }
-                return Ok(Request);
+                else
+                {
+                    ClnControlError obj = new ClnControlError();
+                    Console.WriteLine("AQUI LLEGUE X");
+                    var error = new CenControlError
+                    {
+                        Tipo = "C",
+                        Descripcion = "Error en insercion de imagen"
+                    };
+                    obj.InsertControlError(error);
+                    return BadRequest(error);
+                }
             }
             catch (Exception ex)
             {
                 ClnControlError obj = new ClnControlError();
+                Console.WriteLine("AQUI LLEGUE X");
                 var error = new CenControlError
                 {
                     Tipo = "C",
@@ -78,15 +97,15 @@ namespace APIService.Controllers
         }
 
         [HttpDelete("eliminarImagen")]
-        public IActionResult DelImagen([FromQuery] CenEliminarImagen EliminarImagen)
+        public IActionResult DelImagen([FromQuery] CenEliminarImagen cenEliminarImagen)
         {
             try
             {
                 ClnImagen clnImagen = new ClnImagen();
-                var request = clnImagen.EliminarImagen(EliminarImagen);
+                var request = clnImagen.EliminarImagen(cenEliminarImagen);
                 if (request.Codigo == "OK")
                 {
-                    var Respuesta = CloudinayConexion.EliminarArchivo(EliminarImagen.Nombre);
+                    var Respuesta = CloudinayConexion.EliminarArchivo(cenEliminarImagen.Nombre);
                 }
                 return Ok(request);
             }

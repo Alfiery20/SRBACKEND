@@ -87,6 +87,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
+                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
@@ -124,6 +125,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
+                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
@@ -161,6 +163,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
+                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();

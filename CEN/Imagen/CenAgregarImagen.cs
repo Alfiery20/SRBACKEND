@@ -8,6 +8,7 @@ namespace CEN.Imagen
 {
     public class CenAgregarImagen
     {
+        public int? IdProducto { get; set; }
         public string? NombreOriginal { get; set; }
         public string? NombrePresenta { get; set; }
         public string? Descripcion { get; set; }

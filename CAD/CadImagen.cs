@@ -38,11 +38,11 @@ namespace CAD
                                 Id = Int32.Parse(reader["id_Imagen"].ToString()),
                                 NombreOriginal = reader["nombre_Original"].ToString(),
                                 NombrePresenta = reader["nombre_Presentacion"].ToString(),
-                                Descripcion = reader["descripcion"].ToString()
                             }
                         );
                     }
                 }
+                response.Codigo = "OK";
                 response.Descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
                 response.Tipo = "R";
                 response.Objeto = lista;
@@ -69,6 +69,7 @@ namespace CAD
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudImagen", _sqlConexion);
                 cmd.Parameters.Add(new SqlParameter("@pid_Imagen", null));
+                cmd.Parameters.Add(new SqlParameter("@pid_Producto", AgregarImagen.IdProducto == null ? null : AgregarImagen.IdProducto));
                 cmd.Parameters.Add(new SqlParameter("@pnombreOriginal_Imagen", AgregarImagen.NombreOriginal == null ? null : AgregarImagen.NombreOriginal.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pnombrePresentacion_Imagen", AgregarImagen.NombrePresenta == null ? null : AgregarImagen.NombrePresenta.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pdescripcion_Imagen", AgregarImagen.Descripcion == null ? null : AgregarImagen.Descripcion.Trim()));
@@ -80,6 +81,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
+                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
@@ -108,6 +110,7 @@ namespace CAD
                 _sqlConexion.Open();
                 cmd = new SqlCommand("sp_iudImagen", _sqlConexion);
                 cmd.Parameters.Add(new SqlParameter("@pid_Imagen", EliminarImagen.Id == null ? null : EliminarImagen.Id));
+                cmd.Parameters.Add(new SqlParameter("@pid_Producto", null));
                 cmd.Parameters.Add(new SqlParameter("@pnombreOriginal_Imagen", null));
                 cmd.Parameters.Add(new SqlParameter("@pnombrePresentacion_Imagen", null));
                 cmd.Parameters.Add(new SqlParameter("@pdescripcion_Imagen", null));
@@ -119,6 +122,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
+                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
