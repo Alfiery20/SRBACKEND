@@ -8,32 +8,37 @@ namespace Services.Imgs
 {
     public static class CloudinayConexion
     {
-        public static void Conexion(IFormFile Imagen)
+        public static int SubirArchivo(IFormFile Imagen, string Nombre)
         {
+            int respuesta = 0;
             var cloudinary = new Cloudinary(new Account(Constants.Cloud, Constants.Api_key, Constants.Api_secret));
-
             using (var stream = Imagen.OpenReadStream())
             {
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(Imagen.FileName, stream),
-                    PublicId = Imagen.FileName
+                    PublicId = Nombre
                 };
-                cloudinary.Upload(uploadParams);
+                var uploadResult = cloudinary.Upload(uploadParams);
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    respuesta = 1;
+                }
             }
-
-            //// Upload
-            //var uploadParams = new ImageUploadParams()
-            //{
-            //    File = new FileDescription("Nombre", Imagen),
-            //    PublicId = "MENSAJE PRUEBA"
-            //};
-
-            //var uploadResult = cloudinary.Upload(uploadParams);
-
-            //Transformation
-            //cloudinary.Api.UrlImgUp.Transform(new Transformation().Width(100).Height(150).Crop("fill")).BuildUrl("olympic_flag");
-            //cloudinary.Api.UrlImgUp.Transform(new Transformation().Width(100).Height(150).Crop("fill")).BuildUrl("olympic_flag");
+            return respuesta;
+        }
+        public static int EliminarArchivo(string nombreImg)
+        {
+            int respuesta = 0;
+            Account account = new Account(Constants.Cloud, Constants.Api_key, Constants.Api_secret);
+            Cloudinary cloudinary = new Cloudinary(account);
+            var destroyParams = new DeletionParams(nombreImg);
+            DeletionResult result = cloudinary.Destroy(destroyParams);
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                respuesta = 1;
+            }
+            return respuesta;
         }
     }
 }
