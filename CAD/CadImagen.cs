@@ -37,7 +37,8 @@ namespace CAD
                             {
                                 Id = Int32.Parse(reader["id_Imagen"].ToString()),
                                 NombreOriginal = reader["nombre_Original"].ToString(),
-                                NombrePresenta = reader["nombre_Presentacion"].ToString(),
+                                NombrePresenta = Constants.Base_url_cloud + Constants.Dimensions
+                                                + reader["nombre_Presentacion"].ToString(),
                             }
                         );
                     }

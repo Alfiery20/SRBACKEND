@@ -95,7 +95,8 @@ namespace APIService
             Constants.Cloud = this.Configuration.GetValue<String>("cloudinary:cloud");
             Constants.Api_key = this.Configuration.GetValue<String>("cloudinary:api_key");
             Constants.Api_secret = this.Configuration.GetValue<String>("cloudinary:api_secret");
-
+            Constants.Base_url_cloud = this.Configuration.GetValue<String>("cloudinary:base_url");
+            Constants.Dimensions = this.Configuration.GetValue<String>("cloudinary:dimensions");
         }
     }
 }

@@ -17,5 +17,7 @@ namespace CEN.Helpers
         public static string? Cloud { get; set; }
         public static string? Api_key { get; set; }
         public static string? Api_secret { get; set; }
+        public static string? Base_url_cloud { get; set; }
+        public static string? Dimensions { get; set; }
     }
 }
