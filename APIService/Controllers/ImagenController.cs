@@ -16,7 +16,7 @@ namespace APIService.Controllers
     [ApiController]
     public class ImagenController : ControllerBase
     {
-        [HttpPost("listarImagens")]
+        [HttpPost("listarImagenes")]
         public IActionResult ListarImagens([FromBody] ListarImagenesRequest listarImagenRequest)
         {
             try
@@ -40,39 +40,34 @@ namespace APIService.Controllers
 
         [HttpPost("agregarImagen")]
         [Consumes("multipart/form-data")]
-        public IActionResult AddImagen([FromQuery] string descripcion, [FromQuery] int idProducto, IFormFile imagen)
+        public IActionResult AddImagen([FromForm] CenAgregarFichero cenAgregarFichero)
         {
             try
             {
                 ClnImagen clnImagen = new();
                 string date = DateTime.Now.ToString("MM-dd-yyyy_hh:mm");
-                string nombre = "SumaqRumi_" + (clnImagen.ObtenerCodigo(idProducto) + 1) + "_" + date;
-                int respuesta = CloudinayConexion.SubirArchivo(imagen, nombre);
+                string nombre = "SumaqRumi_" + (clnImagen.ObtenerCodigo(cenAgregarFichero.IdProducto) + 1) + "_" + date;
+                int respuesta = CloudinayConexion.SubirArchivo(cenAgregarFichero.File, nombre);
                 CenAgregarImagen agregarimagen = new();
-                Console.WriteLine("AQUI LLEGUE 1");
                 if (respuesta == 1)
                 {
-                    Console.WriteLine("AQUI LLEGUE 2");
                     agregarimagen = new()
                     {
-                        Descripcion = descripcion,
-                        NombreOriginal = imagen.FileName,
+                        Descripcion = cenAgregarFichero.Descripcion,
+                        NombreOriginal = cenAgregarFichero.File.FileName,
                         NombrePresenta = nombre,
-                        IdProducto = idProducto
+                        IdProducto = cenAgregarFichero.IdProducto
                     };
                     var request = clnImagen.AgregarImagen(agregarimagen);
-                    Console.WriteLine("AQUI LLEGUE 3");
                     if (request.Codigo != "OK")
                     {
                         CloudinayConexion.EliminarArchivo(nombre);
                     }
-                    Console.WriteLine("AQUI LLEGUE 4");
                     return Ok(request);
                 }
                 else
                 {
                     ClnControlError obj = new ClnControlError();
-                    Console.WriteLine("AQUI LLEGUE X");
                     var error = new CenControlError
                     {
                         Tipo = "C",
@@ -85,7 +80,6 @@ namespace APIService.Controllers
             catch (Exception ex)
             {
                 ClnControlError obj = new ClnControlError();
-                Console.WriteLine("AQUI LLEGUE X");
                 var error = new CenControlError
                 {
                     Tipo = "C",
