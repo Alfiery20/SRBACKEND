@@ -10,7 +10,6 @@ namespace CEN.Producto
     {
         public string? Nombre { get; set; }
         public string? Descripcion { get; set; }
-        public int? Stock { get; set; }
         public double? Peso { get; set; }
         public double? Precio { get; set; }
         public int? id_Categoria { get; set; }

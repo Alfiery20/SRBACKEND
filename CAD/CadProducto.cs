@@ -44,24 +44,16 @@ namespace CAD
                     {
                         lista.Add(new ProductoResponse
                         {
-                            Producto = new CenProducto()
-                            {
-                                Id = Int32.Parse(reader["id_Producto"].ToString()),
-                                Codigo = reader["codigo_Producto"].ToString(),
-                                Nombre = reader["nombre_Producto"].ToString(),
-                                Descripcion = reader["descripcion"].ToString(),
-                                Stock = Int32.Parse(reader["stock"].ToString()),
-                                Peso = double.Parse(reader["peso"].ToString()),
-                                Precio = double.Parse(reader["precio"].ToString()),
-                                Estado = reader["estado_Producto"].ToString()
-                            },
-                            Categoria = new CenCategoria()
-                            {
-                                Id = Int32.Parse(reader["id_Categoria"].ToString()),
-                                Codigo = reader["codigo_Categoria"].ToString(),
-                                Nombre = reader["nombre_Categoria"].ToString(),
-                                Estado = reader["estado_Categoria"].ToString()
-                            }
+                            Id = Int32.Parse(reader["id_Producto"].ToString()),
+                            Codigo = reader["codigo_Producto"].ToString(),
+                            Nombre = reader["nombre_Producto"].ToString(),
+                            Descripcion = reader["descripcion"].ToString(),
+                            Stock = Int32.Parse(reader["stock"].ToString()),
+                            Peso = double.Parse(reader["peso"].ToString()),
+                            Precio = double.Parse(reader["precio"].ToString()),
+                            Estado = reader["estado_Producto"].ToString(),
+                            Id_Categoria = Int32.Parse(reader["id_Categoria"].ToString()),
+                            NombreCategoria = reader["nombre_Categoria"].ToString(),
                         });
                     }
                 }
@@ -99,7 +91,7 @@ namespace CAD
                 cmd.Parameters.Add(new SqlParameter("@pid_Producto", null));
                 cmd.Parameters.Add(new SqlParameter("@pnombre_Producto", AgregarProducto.Nombre == null ? null : AgregarProducto.Nombre.Trim()));
                 cmd.Parameters.Add(new SqlParameter("@pdescripcion_Producto", AgregarProducto.Descripcion == null ? null : AgregarProducto.Descripcion.Trim()));
-                cmd.Parameters.Add(new SqlParameter("@pstock", AgregarProducto.Stock == null ? null : AgregarProducto.Stock));
+                cmd.Parameters.Add(new SqlParameter("@pstock", null));
                 cmd.Parameters.Add(new SqlParameter("@ppeso", AgregarProducto.Peso == null ? null : AgregarProducto.Peso));
                 cmd.Parameters.Add(new SqlParameter("@pprecio", AgregarProducto.Precio == null ? null : AgregarProducto.Precio));
                 cmd.Parameters.Add(new SqlParameter("@pid_categoria", AgregarProducto.id_Categoria == null ? null : AgregarProducto.id_Categoria));
@@ -236,28 +228,20 @@ namespace CAD
                     {
                         productoResponse = new()
                         {
-                            Producto = new CenProducto()
-                            {
-                                Id = Int32.Parse(reader["id_Producto"].ToString()),
-                                Codigo = reader["codigo_Producto"].ToString(),
-                                Nombre = reader["nombre_Producto"].ToString(),
-                                Descripcion = reader["descripcion"].ToString(),
-                                Stock = Int32.Parse(reader["stock"].ToString()),
-                                Peso = double.Parse(reader["peso"].ToString()),
-                                Precio = double.Parse(reader["precio"].ToString()),
-                                Estado = reader["estado_Producto"].ToString()
-                            },
-                            Categoria = new CenCategoria()
-                            {
-                                Id = Int32.Parse(reader["id_Categoria"].ToString()),
-                                Codigo = reader["codigo_Categoria"].ToString(),
-                                Nombre = reader["nombre_Categoria"].ToString(),
-                                Estado = reader["estado_Categoria"].ToString()
-                            }
+                            Id = Int32.Parse(reader["id_Producto"].ToString()),
+                            Codigo = reader["codigo_Producto"].ToString(),
+                            Nombre = reader["nombre_Producto"].ToString(),
+                            Descripcion = reader["descripcion"].ToString(),
+                            Stock = Int32.Parse(reader["stock"].ToString()),
+                            Peso = double.Parse(reader["peso"].ToString()),
+                            Precio = double.Parse(reader["precio"].ToString()),
+                            Estado = reader["estado_Producto"].ToString(),
+                            Id_Categoria = Int32.Parse(reader["id_Categoria"].ToString()),
+                            NombreCategoria = reader["nombre_Categoria"].ToString(),
                         };
                     }
 
-                response.Descripcion = string.IsNullOrEmpty(productoResponse.Producto.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
+                response.Descripcion = string.IsNullOrEmpty(productoResponse.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
                 response.Tipo = "R";
                 response.Objeto = productoResponse;
                 return response;
