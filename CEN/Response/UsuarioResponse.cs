@@ -15,6 +15,5 @@ namespace CEN.Response
         public string? ApellidoMaterno { get; set; }
         public string? CorreoElectronico { get; set; }
         public string? Token { get; set; }
-
     }
 }

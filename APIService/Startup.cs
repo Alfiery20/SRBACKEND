@@ -1,18 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CEN.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -33,22 +22,55 @@ namespace APIService
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(
-                c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIService", Version = "V1" })
+                c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIService", Version = "V1" });
+                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        Description = "Ingrese el token JWT con el prefijo 'Bearer' en el campo. Ejemplo: Bearer {token}",
+                        Name = "Authorization",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.ApiKey,
+                        Scheme = "Bearer"
+                    });
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new List<String>()
+                        }
+                    });
+                }
             );
             services.AddCors();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = this.Configuration.GetValue<String>("jwt:Issuer"),
-                    ValidAudience = this.Configuration.GetValue<String>("jwt:Audience"),
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration.GetValue<String>("jwt:key")))
-                };
-            });
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            //{
+            //    options.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = false,
+            //        ValidIssuer = null,
+            //        ValidAudience = null,
+            //        ValidateAudience = false,
+            //        ValidateLifetime = true,
+            //        ValidateIssuerSigningKey = true,
+            //        //ValidIssuer = this.Configuration.GetValue<String>("jwt:Issuer"),
+            //        //ValidAudience = this.Configuration.GetValue<String>("jwt:Audience"),
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration.GetValue<String>("jwt:key")))
+            //    };
+            //});
+            //services.AddAuthorization(options =>
+            //{
+            //    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+            //    .RequireAuthenticatedUser()
+            //    .Build();
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -64,11 +86,9 @@ namespace APIService
             app.UseRouting();
             app.UseCors(
             options => options
-                //.WithOrigins("http://tu-casa-ahora.s3-website-us-east-1.amazonaws.com","http://localhost:8080")
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-
             );
             app.UseAuthorization();
             app.UseAuthentication();
@@ -97,6 +117,12 @@ namespace APIService
             Constants.Api_secret = this.Configuration.GetValue<String>("cloudinary:api_secret");
             Constants.Base_url_cloud = this.Configuration.GetValue<String>("cloudinary:base_url");
             Constants.Dimensions = this.Configuration.GetValue<String>("cloudinary:dimensions");
+            Constants.Key = this.Configuration.GetValue<String>("jwt:key");
+            Constants.Key = this.Configuration.GetValue<String>("jwt:key");
+            Constants.Issuer = this.Configuration.GetValue<String>("jwt:Issuer");
+            Constants.Audience = this.Configuration.GetValue<String>("jwt:Audience");
+            Constants.Subject = this.Configuration.GetValue<String>("jwt:Subject");
+            Constants.Expire = this.Configuration.GetValue<int>("jwt:Expire");
         }
     }
 }

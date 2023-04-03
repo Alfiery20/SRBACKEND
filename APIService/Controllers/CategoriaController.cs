@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 using CEN.Categoria;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIService.Controllers
 {

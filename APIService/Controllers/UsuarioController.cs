@@ -1,5 +1,6 @@
 ﻿using CAD;
 using CEN;
+using CEN.Helpers;
 using CEN.Request;
 using CEN.Response;
 using CEN.Usuario;
@@ -57,14 +58,22 @@ namespace APIService.Controllers
                 var request = clnUsuario.ValidarUsuario(loginRequest);
                 if (request.Codigo == "1")
                 {
-                    var jwt = _configuration.GetSection("jwt").Get<CenJWT>();
-                    JwtSecurityToken token = TokenService.GenerarToken(jwt, (UsuarioResponse)request.Objeto);
-                    var tokennuevo = new JwtSecurityTokenHandler().WriteToken(token);
-                    ((UsuarioResponse)request.Objeto).Token = tokennuevo;
+                    UsuarioResponse usuarioResponse = (UsuarioResponse)clnUsuario.ValidarUsuario(loginRequest).Objeto;
+                    var jwt = new CenJWT()
+                    {
+                        Key = Constants.Key,
+                        Issuer = Constants.Issuer,
+                        Audience = Constants.Audience,
+                        Subject = Constants.Subject,
+                        Expire = Constants.Expire
+                    };
+                    var tokennuevo = TokenService.GenerarToken2_(jwt, usuarioResponse);
+                    usuarioResponse.Token = tokennuevo;
                     InsertTokenRequest insert = new InsertTokenRequest();
-                    insert.Correo = ((UsuarioResponse)request.Objeto).CorreoElectronico;
-                    insert.Token = ((UsuarioResponse)request.Objeto).Token;
+                    insert.Correo = usuarioResponse.CorreoElectronico;
+                    insert.Token = usuarioResponse.Token;
                     clnUsuario.InsertToken(insert);
+                    request.Objeto = usuarioResponse;
                 }
                 return Ok(request);
             }
