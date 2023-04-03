@@ -12,6 +12,8 @@ namespace CEN.Request
         public string? Nombre { get; set; }
         public double? PrecioMinimo { get; set; }
         public double? PrecioMax { get; set; }
+        public int? idCategoria { get; set; }
+        public int? idMaterial { get; set; }
         public int? Pagina { get; set; }
         public int? Cantidad { get; set; }
     }

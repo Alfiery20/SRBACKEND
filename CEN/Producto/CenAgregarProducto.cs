@@ -14,6 +14,7 @@ namespace CEN.Producto
         public double? Peso { get; set; }
         public double? Precio { get; set; }
         public int? id_Categoria { get; set; }
-        public string? ids_etiquetas { get; set; }
+        public string? Ids_etiquetas { get; set; }
+        public string? Ids_porc_material{ get; set; }
     }
 }
