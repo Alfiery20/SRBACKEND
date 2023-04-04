@@ -44,6 +44,7 @@ namespace CAD
                     }
                 }
                 response.Descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Codigo = "OK";
                 response.Tipo = "R";
                 response.Objeto = lista;
                 return response;

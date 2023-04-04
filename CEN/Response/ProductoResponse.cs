@@ -20,5 +20,6 @@ namespace CEN.Response
         public double? Precio { get; set; }
         public int? Id_Categoria { get; set; }
         public string? NombreCategoria { get; set; }
+        public List<EtiquetaResponse>? Etiquetas { get; set; }
     }
 }

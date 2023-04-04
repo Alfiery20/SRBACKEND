@@ -164,6 +164,7 @@ namespace CAD
                     }
 
                 response.Descripcion = string.IsNullOrEmpty(Imagen.NombreOriginal) ? "Categoría no encontrada" : "Operacion Exitosa";
+                response.Codigo = "OK";
                 response.Tipo = "R";
                 response.Objeto = Imagen;
                 return response;

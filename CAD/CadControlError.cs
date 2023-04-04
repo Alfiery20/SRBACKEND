@@ -30,6 +30,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
+                        response.Codigo = "OK";
                         response.Tipo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["DESCRIPCION"].ToString();
                     }

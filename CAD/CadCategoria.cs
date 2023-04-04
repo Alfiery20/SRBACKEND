@@ -49,6 +49,7 @@ namespace CAD
                     }
                 }
                 response.Descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Codigo = "OK";
                 response.Tipo = "R";
                 response.Objeto = new Paginado
                 {
@@ -206,6 +207,7 @@ namespace CAD
                     }
 
                 response.Descripcion = string.IsNullOrEmpty(categoria.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
+                response.Codigo = "OK";
                 response.Tipo = "R";
                 response.Objeto = categoria;
                 return response;

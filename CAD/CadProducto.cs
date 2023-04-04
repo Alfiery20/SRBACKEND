@@ -54,10 +54,12 @@ namespace CAD
                             Estado = reader["estado_Producto"].ToString(),
                             Id_Categoria = Int32.Parse(reader["id_Categoria"].ToString()),
                             NombreCategoria = reader["nombre_Categoria"].ToString(),
+                            Etiquetas = this.GetEtiquetaResponseList(reader["etiquetas"].ToString())
                         });
                     }
                 }
                 response.Descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Codigo = "OK";
                 response.Tipo = "R";
                 response.Objeto = new Paginado
                 {
@@ -238,10 +240,12 @@ namespace CAD
                             Estado = reader["estado_Producto"].ToString(),
                             Id_Categoria = Int32.Parse(reader["id_Categoria"].ToString()),
                             NombreCategoria = reader["nombre_Categoria"].ToString(),
+                            Etiquetas = this.GetEtiquetaResponseList(reader["etiquetas"].ToString())
                         };
                     }
 
                 response.Descripcion = string.IsNullOrEmpty(productoResponse.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
+                response.Codigo = "OK";
                 response.Tipo = "R";
                 response.Objeto = productoResponse;
                 return response;
@@ -288,6 +292,23 @@ namespace CAD
             {
                 _sqlConexion.Close();
             }
+        }
+        private List<EtiquetaResponse> GetEtiquetaResponseList(string BDEtiquetas)
+        {
+            List<EtiquetaResponse> ListEtiquetas = new();
+            if (!string.IsNullOrEmpty(BDEtiquetas))
+            {
+                var Etiquetas = BDEtiquetas.Split("-");
+                foreach (var item in Etiquetas)
+                {
+                    ListEtiquetas.Add(new EtiquetaResponse
+                    {
+                        Id_Etiqueta = Int32.Parse(item.Split("*")[0]),
+                        Nombre_Etiqueta = item.Split("*")[1]
+                    });
+                }
+            }
+            return ListEtiquetas;
         }
     }
 }

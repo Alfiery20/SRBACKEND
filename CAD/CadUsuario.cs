@@ -102,7 +102,6 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
-
         public CenControlError InsertToken(InsertTokenRequest insertTokenRequest)
         {
             CenControlError response = new CenControlError();
