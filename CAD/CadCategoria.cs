@@ -48,8 +48,9 @@ namespace CAD
                         );
                     }
                 }
-                response.Descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
-                response.Codigo = "OK";
+                bool tipoRespuesta = lista.Count == 0;
+                response.Descripcion = tipoRespuesta ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Codigo = tipoRespuesta ? "EX" : "OK";
                 response.Tipo = "R";
                 response.Objeto = new Paginado
                 {
@@ -90,7 +91,6 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
@@ -128,7 +128,6 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
@@ -166,7 +165,6 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
@@ -205,9 +203,9 @@ namespace CAD
                         categoria.Nombre = reader["nombre_Categoria"].ToString();
                         categoria.Estado = reader["estado_Categoria"].ToString();
                     }
-
-                response.Descripcion = string.IsNullOrEmpty(categoria.Codigo) ? "Categoría no encontrada" : "Operacion Exitosa";
-                response.Codigo = "OK";
+                bool tipoRespuesta = string.IsNullOrEmpty(categoria.Codigo);
+                response.Descripcion = tipoRespuesta ? "Categoría no encontrada" : "Operacion Exitosa";
+                response.Codigo = tipoRespuesta ? "EX" : "OK";
                 response.Tipo = "R";
                 response.Objeto = categoria;
                 return response;
