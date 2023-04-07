@@ -9,11 +9,76 @@ using System.Text;
 using System.Threading.Tasks;
 using CEN.Helpers;
 using CEN.Venta;
+using CEN.Request;
+using CEN.Response;
 
 namespace CAD
 {
     public class CadVenta
     {
+        public CenControlError ListarVentas(ListarVentaRequest request)
+        {
+            CenControlError response = new CenControlError();
+            SqlConnection _sqlConexion;
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
+            SqlCommand cmd;
+            List<VentaResponse> lista = new();
+            try
+            {
+                _sqlConexion.Open();
+                cmd = new SqlCommand("sp_obtenerVentas", _sqlConexion);
+                cmd.Parameters.AddWithValue("@pcodigo_venta", request.CodigoVenta == null ? null : request.CodigoVenta.Trim());
+                cmd.Parameters.AddWithValue("@pfecha_minima", request.FechaMinima == null ? null : request.FechaMinima);
+                cmd.Parameters.AddWithValue("@pfecha_maxima", request.FechaMaxima == null ? null : request.FechaMaxima);
+                cmd.Parameters.AddWithValue("@pestado_venta", request.EstadoVenta == null ? null : request.EstadoVenta.Trim());
+                cmd.Parameters.AddWithValue("@ppage", request.Pagina);
+                cmd.Parameters.AddWithValue("@pcount", request.Cantidad);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(
+                             new VentaResponse()
+                             {
+                                 IdVenta = Int32.Parse(reader["id_Venta"].ToString()),
+                                 CodigoVenta = reader["codigo_Venta"].ToString(),
+                                 FechaSolicitud = DateTime.Parse(reader["fecha_Solicitud"].ToString()),
+                                 IdUsuarioAprueba = Int32.Parse(reader["id_UsuarioAprueba"].ToString()),
+                                 NombreAprueba = reader["nombreAprueba"].ToString(),
+                                 IdUsuarioEdita = Int32.Parse(reader["id_UsuarioEdita"].ToString()),
+                                 NombreEdita = reader["nombreEdita"].ToString(),
+                                 FechaEdita = DateTime.Parse(reader["fecha_Edita"].ToString()),
+                                 FechaEntrega = DateTime.Parse(reader["fecha_Entrega"].ToString()),
+                                 DireccionEntrega = reader["direccion_Entrega"].ToString(),
+                                 EstadoVenta = reader["estado_Venta"].ToString(),
+                                 IdCondado = Int32.Parse(reader["id_Condado"].ToString())
+                             }
+                        );
+                    }
+                }
+                bool tipoRespuesta = lista.Count == 0;
+                response.Descripcion = tipoRespuesta ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Codigo = tipoRespuesta ? "EX" : "OK";
+                response.Tipo = "R";
+                response.Objeto = new Paginado
+                {
+                    Pagina = request.Pagina,
+                    Tamanio = request.Cantidad,
+                    Total_Resultados = ContarVenta(request),
+                    Data = lista
+                };
+                return response;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _sqlConexion.Close();
+            }
+        }
         public CenControlError CrearCarritoCompras(CenAgregarVenta AgregarVenta)
         {
             string accion = "I";
@@ -298,6 +363,39 @@ namespace CAD
                 return response;
             }
             catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _sqlConexion.Close();
+            }
+        }
+        private int ContarVenta(ListarVentaRequest request)
+        {
+            int total = 0;
+            SqlConnection _sqlConexion;
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
+            SqlCommand cmd;
+            try
+            {
+                _sqlConexion.Open();
+                cmd = new SqlCommand("sp_ContarVentas", _sqlConexion);
+                cmd.Parameters.AddWithValue("@pcodigo_venta", request.CodigoVenta == null ? null : request.CodigoVenta.Trim());
+                cmd.Parameters.AddWithValue("@pfecha_minima", request.FechaMinima == null ? null : request.FechaMinima);
+                cmd.Parameters.AddWithValue("@pfecha_maxima", request.FechaMaxima == null ? null : request.FechaMaxima);
+                cmd.Parameters.AddWithValue("@pestado_venta", request.EstadoVenta == null ? null : request.EstadoVenta.Trim());
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        total = Int32.Parse(reader["TOTAL_REGISTROS"].ToString());
+                    }
+                }
+                return total;
+            }
+            catch (System.Exception)
             {
                 throw;
             }

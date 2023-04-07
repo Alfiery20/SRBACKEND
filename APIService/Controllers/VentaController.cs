@@ -15,6 +15,27 @@ namespace APIService.Controllers
     [ApiController]
     public class VentaController : ControllerBase
     {
+        [HttpPost("ListarVenta")]
+        public IActionResult ListarVentas([FromBody] ListarVentaRequest ListarVenta)
+        {
+            try
+            {
+                ClnVenta ClnVenta = new();
+                var request = ClnVenta.ListarVenta(ListarVenta);
+                return Ok(request);
+            }
+            catch (Exception ex)
+            {
+                ClnControlError obj = new ClnControlError();
+                var error = new CenControlError
+                {
+                    Tipo = "R",
+                    Descripcion = ex.Message
+                };
+                obj.InsertControlError(error);
+                return BadRequest(error);
+            }
+        }
         [HttpPost("CrearCarrito")]
         public IActionResult ListarCategorias([FromBody] CenAgregarVenta AgregarVenta)
         {

@@ -12,6 +12,11 @@ namespace CLN
 {
     public class ClnVenta
     {
+        public CenControlError ListarVenta(ListarVentaRequest request)
+        {
+            CadVenta c = new();
+            return c.ListarVentas(request);
+        }
         public CenControlError CrearCarritoCompras(CenAgregarVenta request)
         {
             CadVenta c = new();

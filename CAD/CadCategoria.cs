@@ -23,7 +23,7 @@ namespace CAD
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
-            List<CenCategoria> lista = new List<CenCategoria>();
+            List<CenCategoria> lista = new();
             try
             {
                 _sqlConexion.Open();
