@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CEN
+namespace CEN.DetalleVenta
 {
-    public class CenDetalleCompra
+    public class CenAgregarDetalleVenta
     {
-        public int? Id { get; set; }
         public int? Cantidad { get; set; }
-        public double? subtotal { get; set; }
         public int? IdProducto { get; set; }
-        public int? IdCompra { get; set; }
-        public double? PrecioCompre { get; set; }
+        public double? PrecioVenta { get; set; }
+        public int? IdVenta { get; set; }
     }
 }
