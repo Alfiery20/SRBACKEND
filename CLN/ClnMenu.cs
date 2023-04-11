@@ -21,5 +21,10 @@ namespace CLN
             CadMenu c = new();
             return c.ListarMenuMaterial();
         }
+        public CenControlError ListarMenuEtiquetas()
+        {
+            CadMenu c = new();
+            return c.ListarMenuEtiquetas();
+        }
     }
 }

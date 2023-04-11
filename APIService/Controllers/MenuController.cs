@@ -56,5 +56,26 @@ namespace APIService.Controllers
                 return BadRequest(error);
             }
         }
+        [HttpGet("listarMenuEtiquetas")]
+        public IActionResult ListarMenuEtiquetas()
+        {
+            try
+            {
+                ClnMenu ClnMenu = new();
+                var request = ClnMenu.ListarMenuEtiquetas();
+                return Ok(request);
+            }
+            catch (Exception ex)
+            {
+                ClnControlError obj = new ClnControlError();
+                var error = new CenControlError
+                {
+                    Tipo = "R",
+                    Descripcion = ex.Message
+                };
+                obj.InsertControlError(error);
+                return BadRequest(error);
+            }
+        }
     }
 }

@@ -95,5 +95,45 @@ namespace CAD
                 _sqlConexion.Close();
             }
         }
+        public CenControlError ListarMenuEtiquetas()
+        {
+            CenControlError response = new CenControlError();
+            SqlConnection _sqlConexion;
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
+            SqlCommand cmd;
+            List<EtiquetaMenu> lista = new();
+            try
+            {
+                _sqlConexion.Open();
+                cmd = new SqlCommand("sp_obtenerMenuEtiquetas", _sqlConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(
+                            new EtiquetaMenu()
+                            {
+                                IdEtiqueta = Int32.Parse(reader["id_Etiqueta"].ToString()),
+                                NombreEtiqueta = reader["nombre_Etiqueta"].ToString()
+                            }
+                        );
+                    }
+                }
+                response.Descripcion = lista.Count == 0 ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Codigo = "OK";
+                response.Tipo = "R";
+                response.Objeto = lista;
+                return response;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _sqlConexion.Close();
+            }
+        }
     }
 }
