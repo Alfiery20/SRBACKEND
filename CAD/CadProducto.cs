@@ -24,7 +24,7 @@ namespace CAD
             SqlConnection _sqlConexion;
             _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
             SqlCommand cmd;
-            List<ProductoResponse> lista = new();
+            List<ProductosResponse> lista = new();
             try
             {
                 _sqlConexion.Open();
@@ -42,7 +42,7 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        lista.Add(new ProductoResponse
+                        lista.Add(new ProductosResponse
                         {
                             Id = Int32.Parse(reader["id_Producto"].ToString()),
                             Codigo = reader["codigo_Producto"].ToString(),
@@ -52,9 +52,7 @@ namespace CAD
                             Peso = double.Parse(reader["peso"].ToString()),
                             Precio = double.Parse(reader["precio"].ToString()),
                             Estado = reader["estado_Producto"].ToString(),
-                            Id_Categoria = Int32.Parse(reader["id_Categoria"].ToString()),
                             NombreCategoria = reader["nombre_Categoria"].ToString(),
-                            Etiquetas = this.GetEtiquetaResponseList(reader["etiquetas"].ToString())
                         });
                     }
                 }
@@ -107,10 +105,10 @@ namespace CAD
                 {
                     while (reader.Read())
                     {
-                        response.Codigo = "OK";
                         response.Tipo = accion;
                         response.Codigo = reader["CODIGO"].ToString();
                         response.Descripcion = reader["MENSAJE"].ToString();
+                        response.Objeto = Int32.Parse(reader["OBJETO"].ToString());
                     }
                 }
                 return response;
