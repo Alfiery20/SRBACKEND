@@ -1,9 +1,6 @@
-using System.Text;
 using CEN.Helpers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Stripe;
 
 namespace APIService
 {
@@ -83,6 +80,9 @@ namespace APIService
             }
 
             app.UseHttpsRedirection();
+            //STRIPE
+            app.UseStaticFiles();
+            //STRIPE
             app.UseRouting();
             app.UseCors(
             options => options
@@ -123,6 +123,8 @@ namespace APIService
             Constants.Audience = this.Configuration.GetValue<String>("jwt:Audience");
             Constants.Subject = this.Configuration.GetValue<String>("jwt:Subject");
             Constants.Expire = this.Configuration.GetValue<int>("jwt:Expire");
+            //STRIPE
+            StripeConfiguration.ApiKey = this.Configuration.GetValue<string>("stripe_key");
         }
     }
 }

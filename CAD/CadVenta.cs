@@ -42,14 +42,14 @@ namespace CAD
                              new VentaResponse()
                              {
                                  IdVenta = Int32.Parse(reader["id_Venta"].ToString()),
-                                 CodigoVenta = reader["codigo_Venta"].ToString(),
+                                 CodigoVenta = reader["codigo_Venta"] == DBNull.Value ? null : reader["codigo_Venta"].ToString(),
                                  FechaSolicitud = DateTime.Parse(reader["fecha_Solicitud"].ToString()),
-                                 IdUsuarioAprueba = Int32.Parse(reader["id_UsuarioAprueba"].ToString()),
-                                 NombreAprueba = reader["nombreAprueba"].ToString(),
-                                 IdUsuarioEdita = Int32.Parse(reader["id_UsuarioEdita"].ToString()),
-                                 NombreEdita = reader["nombreEdita"].ToString(),
-                                 FechaEdita = DateTime.Parse(reader["fecha_Edita"].ToString()),
-                                 FechaEntrega = DateTime.Parse(reader["fecha_Entrega"].ToString()),
+                                 IdUsuarioAprueba = reader["id_UsuarioAprueba"] == DBNull.Value ? null : Int32.Parse(reader["id_UsuarioAprueba"].ToString()),
+                                 NombreAprueba = reader["nombreAprueba"] == DBNull.Value ? null : reader["nombreAprueba"].ToString(),
+                                 IdUsuarioEdita = reader["id_UsuarioEdita"] == DBNull.Value ? null : Int32.Parse(reader["id_UsuarioEdita"].ToString()),
+                                 NombreEdita = reader["nombreEdita"] == DBNull.Value ? null : reader["nombreEdita"].ToString(),
+                                 FechaEdita = reader["fecha_Edita"] == DBNull.Value ? null : DateTime.Parse(reader["fecha_Edita"].ToString()),
+                                 FechaEntrega = reader["fecha_Entrega"] == DBNull.Value ? null : DateTime.Parse(reader["fecha_Entrega"].ToString()),
                                  DireccionEntrega = reader["direccion_Entrega"].ToString(),
                                  EstadoVenta = reader["estado_Venta"].ToString(),
                                  IdCondado = Int32.Parse(reader["id_Condado"].ToString())

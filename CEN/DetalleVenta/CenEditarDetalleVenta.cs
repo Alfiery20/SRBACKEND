@@ -10,6 +10,5 @@ namespace CEN.DetalleVenta
     {
         public int? Id { get; set; }
         public int? Cantidad { get; set; }
-        public double? PrecioVenta { get; set; }
     }
 }

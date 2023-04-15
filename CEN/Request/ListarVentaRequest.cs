@@ -8,12 +8,11 @@ namespace CEN.Request
 {
     public class ListarVentaRequest
     {
-        public string CodigoVenta { get; set; }
+        public string? CodigoVenta { get; set; }
         public DateTime? FechaMinima { get; set; }
         public DateTime? FechaMaxima { get; set; }
         public string? EstadoVenta { get; set; }
         public int? Pagina { get; set; }
         public int? Cantidad { get; set; }
-
     }
 }
