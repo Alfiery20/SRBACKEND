@@ -17,7 +17,7 @@ namespace CAD
 {
     public class CadCompra
     {
-        public CenControlError ListarCompra(ListarCompraRequest request)
+        public CenControlError ListarCompras(ListarCompraRequest request)
         {
             CenControlError response = new CenControlError();
             SqlConnection _sqlConexion;
@@ -27,7 +27,7 @@ namespace CAD
             try
             {
                 _sqlConexion.Open();
-                cmd = new SqlCommand("sp_obtenerCompra", _sqlConexion);
+                cmd = new SqlCommand("sp_obtenerCompras", _sqlConexion);
                 cmd.Parameters.AddWithValue("@pcodigo_Compra", request.CodigoCompra == null ? null : request.CodigoCompra.Trim());
                 cmd.Parameters.AddWithValue("@pfecha_minima", request.FechaMinima == null ? null : request.FechaMinima);
                 cmd.Parameters.AddWithValue("@pfecha_maxima", request.FechaMaxima == null ? null : request.FechaMaxima);
@@ -70,9 +70,64 @@ namespace CAD
                 {
                     Pagina = request.Pagina,
                     Tamanio = request.Cantidad,
-                    Total_Resultados = 0,//ContarCompra(request),
+                    Total_Resultados = ContarCompra(request),
                     Data = lista
                 };
+                return response;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _sqlConexion.Close();
+            }
+        }
+        public CenControlError ObtenerCompra(int idCompra)
+        {
+            CenControlError response = new CenControlError();
+            SqlConnection _sqlConexion;
+            _sqlConexion = new SqlConnection(Constants.Cadena_conexion);
+            SqlCommand cmd;
+            CompraResponse Compra = new();
+            try
+            {
+                _sqlConexion.Open();
+                cmd = new SqlCommand("sp_obtenerCompra", _sqlConexion);
+                cmd.Parameters.AddWithValue("@pid_Compra", idCompra == null ? null : idCompra);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Compra =
+                            new CompraResponse()
+                            {
+                                IdCompra = Int32.Parse(reader["id_compra"].ToString()),
+                                CodigoCompra = reader["codigo_Compra"] == DBNull.Value ? null : reader["codigo_Compra"].ToString(),
+                                Cantidad = Int32.Parse(reader["cantidad"].ToString()),
+                                CostoCompra = double.Parse(reader["costo_Compra"].ToString()),
+                                FechaCompra = DateTime.Parse(reader["fecha_Compra"].ToString()),
+                                IdProducto = Int32.Parse(reader["id_producto"].ToString()),
+                                NombreProducto = reader["nombre_Producto"].ToString(),
+                                IdUsuarioInserta = Int32.Parse(reader["id_usuarioInserta"].ToString()),
+                                NombreUsuarioInserta = reader["nombre_usuario_inserta"].ToString(),
+                                FechaEdita = reader["fecha_Edita"] == DBNull.Value ? null : DateTime.Parse(reader["fecha_Edita"].ToString()),
+                                IdUsuarioEdita = reader["id_usuarioEdita"] == DBNull.Value ? null : Int32.Parse(reader["id_usuarioEdita"].ToString()),
+                                NombreUsuarioEdita = reader["nombre_usuario_edita"] == DBNull.Value ? null : reader["nombre_usuario_edita"].ToString(),
+                                FechaEliminar = reader["fecha_Elimina"] == DBNull.Value ? null : DateTime.Parse(reader["fecha_Elimina"].ToString()),
+                                IdUsuarioElimina = reader["id_usuarioElimina"] == DBNull.Value ? null : Int32.Parse(reader["id_usuarioElimina"].ToString()),
+                                NombreUsuarioElimina = reader["nombre_usuario_elimina"] == DBNull.Value ? null : reader["nombre_usuario_elimina"].ToString(),
+                                EstadoCompra = reader["estado_Compra"].ToString()
+                            };
+                    }
+                }
+                bool tipoRespuesta = Compra == null;
+                response.Descripcion = tipoRespuesta ? "No se encontraron resultados" : "Operacion Exitosa";
+                response.Codigo = tipoRespuesta ? "EX" : "OK";
+                response.Tipo = "R";
+                response.Objeto = Compra;
                 return response;
             }
             catch (System.Exception)

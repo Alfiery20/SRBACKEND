@@ -36,6 +36,27 @@ namespace APIService.Controllers
                 return BadRequest(error);
             }
         }
+        [HttpGet("ObtenerCompra")]
+        public IActionResult ObtenerCompra([FromQuery] int id)
+        {
+            try
+            {
+                ClnCompra ClnCompra = new();
+                var request = ClnCompra.ObtenerCompra(id);
+                return Ok(request);
+            }
+            catch (Exception ex)
+            {
+                ClnControlError obj = new ClnControlError();
+                var error = new CenControlError
+                {
+                    Tipo = "R",
+                    Descripcion = ex.Message
+                };
+                obj.InsertControlError(error);
+                return BadRequest(error);
+            }
+        }
         [HttpPost("AgregarCompra")]
         public IActionResult AprobarCompra([FromBody] CenAgregarCompra EditarCompraAprobada)
         {

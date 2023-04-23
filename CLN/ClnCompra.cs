@@ -15,7 +15,12 @@ namespace CLN
         public CenControlError ListarCompra(ListarCompraRequest request)
         {
             CadCompra c = new();
-            return c.ListarCompra(request);
+            return c.ListarCompras(request);
+        }
+        public CenControlError ObtenerCompra(int idCompra)
+        {
+            CadCompra c = new();
+            return c.ObtenerCompra(idCompra);
         }
         public CenControlError CambiarAAprobada(CenAgregarCompra request)
         {

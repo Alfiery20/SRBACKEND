@@ -35,7 +35,6 @@ namespace APIService.Controllers
                 return BadRequest(error);
             }
         }
-
         [HttpPost("agregarCategoria")]
         public IActionResult AddCategoria([FromBody] CenAgregarCategoria AgregarCategoria)
         {
@@ -57,7 +56,6 @@ namespace APIService.Controllers
                 return BadRequest(error);
             }
         }
-
         [HttpPut("editarCategoria")]
         public IActionResult EditCategoria([FromBody] CenEditarCategoria EditarCategoria)
         {
@@ -79,7 +77,6 @@ namespace APIService.Controllers
                 return BadRequest(error);
             }
         }
-
         [HttpDelete("eliminarCategoria")]
         public IActionResult DelCategoria([FromQuery] CenEliminarCategoria EliminarCategoria)
         {
@@ -101,7 +98,6 @@ namespace APIService.Controllers
                 return BadRequest(error);
             }
         }
-
         [HttpGet("obtenerCategoria")]
         public IActionResult ObtenerCategoria([FromQuery] int id)
         {

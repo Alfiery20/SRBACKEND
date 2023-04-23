@@ -76,7 +76,6 @@ namespace CAD
                 cmd.Parameters.Add(new SqlParameter("@pcantidad", AgregarDetalleVenta.Cantidad == null ? null : AgregarDetalleVenta.Cantidad));
                 cmd.Parameters.Add(new SqlParameter("@pid_Producto", AgregarDetalleVenta.IdProducto == null ? null : AgregarDetalleVenta.IdProducto));
                 cmd.Parameters.Add(new SqlParameter("@pid_Venta", AgregarDetalleVenta.IdVenta == null ? null : AgregarDetalleVenta.IdVenta));
-                cmd.Parameters.Add(new SqlParameter("@pprecioVenta", AgregarDetalleVenta.PrecioVenta == null ? null : AgregarDetalleVenta.PrecioVenta));
                 cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
@@ -116,7 +115,6 @@ namespace CAD
                 cmd.Parameters.Add(new SqlParameter("@pcantidad", EditarDetalleVenta.Cantidad == null ? null : EditarDetalleVenta.Cantidad));
                 cmd.Parameters.Add(new SqlParameter("@pid_Producto", null));
                 cmd.Parameters.Add(new SqlParameter("@pid_Venta", null));
-                cmd.Parameters.Add(new SqlParameter("@pprecioVenta", EditarDetalleVenta.PrecioVenta == null ? null : EditarDetalleVenta.PrecioVenta));
                 cmd.Parameters.Add(new SqlParameter("@paccion", accion));
 
 
